@@ -1,0 +1,33 @@
+body{
+  background-color: #161d1b;
+}
+.row{
+  background-color: white;
+  padding: 1%;
+}
+h4{
+  text-align: center;
+}
+form{
+  padding: 2%;
+  display: block;
+  text-align: left;
+}
+.form-group{
+  margin-bottom: 1rem;
+  display: grid;
+}
+textarea{
+  width: 100%;
+  min-height: 70px;
+  height: 70px;
+}
+.custom-select{
+  padding: 0;
+}
+.btn-default{
+  background: #ace017;
+}
+.container{
+  margin-bottom: 30px;
+}
