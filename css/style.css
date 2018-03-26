@@ -8,7 +8,7 @@ and open the template in the editor.
     Author     : A. David Rodríguez C. <duvid9320@gmai.com>
 test change master fetched
 */ 
-img{
+div.carousel-item > img{
     filter: brightness(50%);
 }
 .main-text
