@@ -8,13 +8,22 @@ and open the template in the editor.
     Author     : A. David Rodríguez C. <duvid9320@gmai.com>
 test change master fetched
 */
-
-
-div.location-container{
+img{
+    filter: brightness(50%);
+}
+.main-text
+{
+    position: absolute;
+    top: 50px;
+    width: 100%;
+    color: #FFF;
+}
+.location-container{
     padding-bottom: 10%;
     padding-top: 10%;
 }
-*.mono-italic-16{
+
+.mono-italic-16{
     font-family: 'SpaceMono-Italic';
     font-size: 16pt;
 }
@@ -24,33 +33,33 @@ img.img-responsive{
     height: auto;
 }
 
-div.promo-container{
+.promo-container{
     padding: 3% 3%;
     color: white;
 }
 
-div.promo-container:nth-child(odd){
+.promo-container:nth-child(odd){
     background: royalblue;
 }
 
-div.promo-container:nth-child(even){
+.promo-container:nth-child(even){
     background: navy;   
 }
 
-h1.promo-title{
+.promo-title{
     color: red;
     font-variant: small-caps;
     font-size: 24pt;
 }
 
-div.descripcion{
+.descripcion{
     padding-top: 10%;
     padding-bottom: 10%;
     padding-left: 5%;
     padding-right: 5%;
 }
 
-span.descripcion{
+.descripcion{
     text-align: justify;
     font-size: 12pt;
     font-family: "SpaceMono-Italic";
