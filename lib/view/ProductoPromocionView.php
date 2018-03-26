@@ -16,26 +16,36 @@ class ProductoPromocionView {
 
     public function showProductoPromocion(ProductoPromocion $productoPromocion, Producto $producto) {
         ?>
-        <div class="menu-container col-xl-4 col-md-6 col-xs-12">
-            <div class="container">
+        <div class="py-5 product text-white col-xl-4 col-md-6 col-xs-12">
+            <div class="row px-3">
+                <div class="col-xl-6 col-xs-12">
+                    <h1 class="product-title">
+                        <?php echo $producto->getNombre() ?>
+                    </h1>
+                </div>
+                <div class="col-xl-6 col-xs-12">
+                    <h1 class="product-price">
+                        $<?php echo $productoPromocion->getPrecioUnitario(); ?> MXN
+                    </h1>
+                </div>
+            </div>
+            <div class="container description">
                 <table class="table">
                     <thead>
                     <th>
-                        <h1 class="menu-title"><?php echo $producto->getNombre()?></h1>
-                    </th>
-                    <th class="">
-                        <h1 class="menu-price">$<?php echo $productoPromocion->getPrecioUnitario();?> MXN</h1>
+                        <span class=""><?php echo $producto->getDescripcion() ?></span>
                     </th>
                     </thead>
                 </table>
             </div>
-            <div class="container descripcion">
-                <span class="descripcion"><?php echo $producto->getDescripcion()?></span>
-            </div>
-            <div class="container img-producto">
-                <img class="img-thumbnail img-responsive " src="images/cat.jpg">
+            <div class="container img-product">
+                <img class="img-thumbnail img-fluid  " src="images/cat.jpg">
+                <div class="btn-container">
+                    <a class="btn-add-cart" style=""><i class="fas fa-cart-plus"></i></a>
+                </div>
             </div>
         </div>
         <?php
     }
+
 }

@@ -22,23 +22,23 @@ class PromocionView {
                     <table class="table">
                         <thead>
                         <th>
-                            <h1 class="menu-title">Promocion <?php echo $promocion->getIdPromocion() ?></h1>
+                            <h1 class="product-title">Promocion <?php echo $promocion->getIdPromocion() ?></h1>
                         </th>
                         <th>
-                            <h1 class="menu-price"><?php echo $promocion->getDia() ?></h1>
+                            <h1 class="product-price"><?php echo $promocion->getDia() ?></h1>
                         </th>
                         </thead>
                     </table>
-                    <div class="row">
+                    <div class="row p-3">
                         <?php $productoPromocionController->showProductosPromocion($promocion) ?>
                     </div>
-                    <table class="table">
+                    <table class="table mt-3">
                         <thead>
                         <th>
-                            <h1 class="menu-title">Total $<?php echo $promocion->getTotal()?> MXN</h1>
+                            <h1 class="product-title">Total $<?php echo $promocion->getTotal()?> MXN</h1>
                         </th>
                         <th class="">
-                            <h1 class="menu-price"><button class="btn-primary"><i class="fas fa-cart-plus"> Lo quiero!</i></button></h1>
+                            <h1 class="product-price"><button class="btn-primary btn form-control-lg form-control" style="font-size: 150%"><i class="fas fa-cart-plus"></i></button></h1>
                         </th>
                         </thead>
                     </table>

@@ -11,7 +11,7 @@
         <?php
         include_once 'lib/modules/nav.php';
         ?>
-        <div class="container-fluid">
+        <div class="container my-5">
             <div class="row">
                 <div class="col-md-6 col-xs-12">
                     <aside class="hidden-xs ">
@@ -37,10 +37,10 @@
                 </div>
             </div>
         </div>
-        <div class="container-fluid location-container">
+        <div class="container-fluid mt-5">
             <div class="row">
                 <div class=" text-center col-md-12 col-xl-12 col-xs-12">
-                    <h4>Ubicación</h4>
+                    <h1>Ubicación</h1>
                 </div>
 
                 <div class="col-md-12 col-xs-12 col-xl-12 embed-responsive embed-responsive-16by9 mr-15">

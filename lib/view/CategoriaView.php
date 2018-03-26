@@ -21,7 +21,7 @@ class CategoriaView {
     
     public function showCategoria(Categoria $categoria){
         ?>
-    <div class="categoria col-md-4 col-sm-6 col-xs-12">
+    <div class="category col-md-4 col-sm-6 col-xs-12">
         <img src="images/cat.jpg" alt= "<?php echo $categoria->getNombre()?>">
         <a class="btn" href="<?php echo "menu.php?categoria=".$categoria->getIdCategoria();?>"> <?php echo $categoria->getNombre();?></a>
         </div>
