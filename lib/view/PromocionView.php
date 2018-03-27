@@ -17,21 +17,18 @@ class PromocionView {
     public function showPromocion(Promocion $promocion){
         $productoPromocionController = new ProductoPromocionController();
         ?>
-            <div class="row">
-                <div class="promo-container col-xl-12 col-xs-12">
-                    <table class="table">
-                        <thead>
-                        <th>
+            <div class="row promo-container">
+                    <div class="col-lg-6 col-xs-12">
                             <h1 class="product-title">Promocion <?php echo $promocion->getIdPromocion() ?></h1>
-                        </th>
-                        <th>
+                    </div>
+                    <div class="col-lg-6 col-xs-12">
                             <h1 class="product-price"><?php echo $promocion->getDia() ?></h1>
-                        </th>
-                        </thead>
-                    </table>
-                    <div class="row p-3">
+                    </div>
+                <div class="container">
+                    <div class="row">
                         <?php $productoPromocionController->showProductosPromocion($promocion) ?>
                     </div>
+                </div>
                     <table class="table mt-3">
                         <thead>
                         <th>
@@ -40,10 +37,9 @@ class PromocionView {
                         <th class="">
                             <h1 class="product-price"><button class="btn-primary btn form-control-lg form-control" style="font-size: 150%"><i class="fas fa-cart-plus"></i></button></h1>
                         </th>
+                        
                         </thead>
                     </table>
-                </div>
-
             </div>
         <?php
     }
