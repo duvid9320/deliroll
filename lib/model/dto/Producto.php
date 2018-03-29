@@ -1,5 +1,6 @@
 <?php
-
+include_once 'Categoria.php';
+include_once 'lib/model/dao/CategoriaDAO.php';
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -17,10 +18,16 @@ class Producto {
     private $descripcion;
     private $precio;
     private $estado;
-    private $categoria;
+    private $idCategoria;
     private $imagen;
     
+    private $categoria;
+    
     public function __construct() {
+    }
+    
+    function getCategoria() : Categoria{
+        return is_null($this->categoria) ? ($this->categoria = CategoriaDAO::getInstance()->getCategoriaById($this->idCategoria)) : $this->categoria;
     }
     
     function getIdProducto() {
@@ -43,8 +50,8 @@ class Producto {
         return $this->estado;
     }
 
-    function getCategoria() {
-        return $this->categoria;
+    function getIdCategoria() {
+        return $this->idCategoria;
     }
 
     function setIdProducto($idProducto) {
@@ -67,8 +74,8 @@ class Producto {
         $this->estado = $estado;
     }
 
-    function setCategoria($categoria) {
-        $this->categoria = $categoria;
+    function setIdCategoria($categoria) {
+        $this->idCategoria= $categoria;
     }
     
     function getImagen() {

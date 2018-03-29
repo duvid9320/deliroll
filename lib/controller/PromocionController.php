@@ -16,9 +16,8 @@ include_once 'lib/view/PromocionView.php';
 class PromocionController {
     
     public function showPromociones(){
-        $promocionDAO = new PromocionDAO();
         $promocionView = new PromocionView();
-        foreach ($promocionDAO->getPromociones() as $promocion) 
+        foreach (PromocionDAO::getInstance()->getPromociones() as $promocion) 
             $promocionView->showPromocion($promocion);
     }
 }

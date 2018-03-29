@@ -18,13 +18,11 @@ include_once 'lib/model/dao/ProductoDAO.php';
 class MenuController {
     public function showCategorias(){
         $view = new CategoriaView();
-        $dao = new CategoriaDAO();
-        $view->showCategorias($dao->getAll());
+        $view->showCategorias(CategoriaDAO::getInstance()->getAll());
     }
     
     public function showProductosCategoria($idCategoria){
         $view = new ProductoView();
-        $productoDAO = new ProductoDAO();
-        $view->showProductos($productoDAO->getProductosCategoria($idCategoria));
+        $view->showProductos(ProductoDAO::getInstance()->getProductosCategoria($idCategoria));
     }
 }

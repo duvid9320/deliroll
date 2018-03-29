@@ -26,6 +26,7 @@ div.carousel-item > img{
 /*Nav style*/
 li.nav-item > a:hover{
     background: red;
+    font-size: 150%;
     color: white;
 }
 /*End nav style*/
@@ -56,10 +57,6 @@ li.nav-item > a:hover{
 
 .category .btn:hover {
     font-weight: bolder;
-}
-
-.product{
-    min-height: 100vh;
 }
 
 .product:nth-child(odd) {
@@ -110,7 +107,6 @@ li.nav-item > a:hover{
 /**End Menú style*/
 
 .promo-container{
-    padding: 3% 3%;
     color: white;
 }
 
@@ -123,9 +119,8 @@ li.nav-item > a:hover{
 }
 
 .promo-title{
-    color: red;
-    font-variant: small-caps;
-    font-size: 24pt;
+    font-variant: all-small-caps;
+    font-family: "SpaceMono-Bold";
 }
 
 .btn-add-cart{

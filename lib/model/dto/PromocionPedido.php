@@ -1,8 +1,8 @@
 <?php
-include_once 'Producto.php';
-include_once 'lib/model/dao/ProductoDAO.php';
-include_once 'Pedido.php';
+include_once 'lib/model/dto/Pedido.php';
 include_once 'lib/model/dao/PedidoDAO.php';
+include_once 'lib/model/dto/Promocion.php';
+include_once 'lib/model/dao/PromocionDAO.php';
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -10,52 +10,53 @@ include_once 'lib/model/dao/PedidoDAO.php';
  */
 
 /**
- * Description of ProductoPedido
+ * Description of PromocionPedido
  *
  * @author A. David Rodríguez C. <duvid9320@gmai.com>
  */
-class ProductoPedido {
-    private $idProducto;
+class PromocionPedido {
     private $idPedido;
+    private $idPromocion;
     private $cantidad;
     
-    private $producto;
     private $pedido;
+    private $promocion;
     
     public function __construct() {
+        ;
     }
     
     public function getSubTotal() {
-        return $this->getProducto()->getPrecio() * $this->getCantidad();
-    }
-    
-    public function getProducto() : Producto{
-        return is_null($this->producto) ? ($this->producto = ProductoDAO::getInstance()->getProductoById($this->idProducto)) : $this->producto;
+        return $this->cantidad * $this->getPromocion()->getTotal();
     }
     
     public function getPedido() : Pedido {
         return is_null($this->pedido) ? ($this->pedido = PedidoDAO::getInstance()->getPedidoById($this->idPedido)) : $this->pedido;
     }
     
-    function getIdProducto() {
-        return $this->idProducto;
+    public function getPromocion() : Promocion {
+        return is_null($this->promocion) ? ($this->promocion = PromocionDAO::getInstance()->getPromocionById($this->idPromocion)) : $this->promocion;
     }
-
+    
     function getIdPedido() {
         return $this->idPedido;
+    }
+
+    function getIdPromocion() {
+        return $this->idPromocion;
     }
 
     function getCantidad() {
         return $this->cantidad;
     }
 
-    function setIdProducto($idProducto) {
-        $this->idProducto = $idProducto;
+    function setIdPedido($idPedido) {
+        $this->idPedido = $idPedido;
         return $this;
     }
 
-    function setIdPedido($idPedido) {
-        $this->idPedido = $idPedido;
+    function setIdPromocion($idPromocion) {
+        $this->idPromocion = $idPromocion;
         return $this;
     }
 

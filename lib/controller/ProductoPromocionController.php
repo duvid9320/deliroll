@@ -16,10 +16,8 @@ include_once 'lib/view/ProductoPromocionView.php';
 class ProductoPromocionController {
     
     public function showProductosPromocion(Promocion $promocion){
-        $productoDAO = new ProductoDAO();
-        $productoPromocionDAO = new ProductoPromocionDAO();
         $productoPromocionView = new ProductoPromocionView();
-        foreach ($productoPromocionDAO->getProductosPromocion($promocion->getIdPromocion()) as $productoPromocion) 
-            $productoPromocionView->showProductoPromocion($productoPromocion, $productoDAO->getProductoById($productoPromocion->getIdProducto()));
+        foreach (ProductoPromocionDAO::getInstance()->getProductosPromocion($promocion->getIdPromocion()) as $productoPromocion) 
+            $productoPromocionView->showProductoPromocion($productoPromocion);
     }
 }

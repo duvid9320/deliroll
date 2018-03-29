@@ -15,8 +15,19 @@ include_once 'lib/model/dto/Categoria.php';
  * @author A. David Rodríguez C. <duvid9320@gmai.com>
  */
 class CategoriaDAO {
+    private static $instance;
     
-    public function __construct() {
+    private function __construct() {
+    }
+    
+    public static function getInstance() : CategoriaDAO{
+        return is_null(self::$instance) ? (self::$instance = new CategoriaDAO()) : self::$instance;
+    }    
+    
+    public function getCategoriaById($id){
+        $stm = Connection::getInstance()->getPDO()->prepare("SELECT * FROM Categoria WHERE idCategoria = ?");
+        $stm->execute([$id]);
+        return $stm->fetchObject('Categoria');
     }
     
     public function getAll(){

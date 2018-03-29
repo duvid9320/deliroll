@@ -32,6 +32,10 @@ class Connection {
             echo 'Error al conectar <br>' . $e->getMessage();
         }
     }
+    
+    public function getPDO() : PDO{
+        return $this->pdo;
+    }
 
     public function getDataObjects($sql, $className): array {
         $result = $this->getResult($sql);

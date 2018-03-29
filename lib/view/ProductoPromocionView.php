@@ -14,7 +14,40 @@ include_once 'lib/model/dto/Producto.php';
  */
 class ProductoPromocionView {
 
-    public function showProductoPromocion(ProductoPromocion $productoPromocion, Producto $producto) {
+    public function showProductosPromocionTable(array $productosPromocion, int $cantidad) {
+        ?>
+        <table class="table bg-primary text-center text-white table-hover">
+            <thead class="bg-dark">
+                <tr>
+                    <th>Nombre</th>
+                    <th>Precio Unitario</th>
+                    <th>Cantidad</th>
+                    <th>Sub-total</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php
+                    foreach ($productosPromocion as $productoPromocion) 
+                        $this->showProductoPromocionTable($productoPromocion, $cantidad);
+                ?>
+            </tbody>
+        </table>
+        <?php
+    }
+
+    public function showProductoPromocionTable(ProductoPromocion $productoPromocion, int $cantidad) {
+        ?>
+<tr>
+    <td><?php echo $productoPromocion->getProducto()->getNombre();?></td>
+    <td><?php echo $productoPromocion->getPrecioUnitario();?></td>
+    <td><?php echo ($cantidad)?></td>
+    <td><?php echo $productoPromocion->getPrecioUnitario()*$cantidad;?></td>
+</tr>
+<?php
+    }
+
+    public function showProductoPromocion(ProductoPromocion $productoPromocion) {
+        $producto = $productoPromocion->getProducto();
         ?>
         <div class="product text-white col-xl-4 col-md-6 col-xs-12 pt-4">
             <div class="container px-4">
@@ -39,46 +72,11 @@ class ProductoPromocionView {
                         </thead>
                     </table>
                 </div>
-                <div class="row align-items-end py-3 mh-1-5">
+                <div class="row align-items-end py-3 pb-5 mh-1-5">
                     <img class="img-thumbnail img-fluid  " src="images/cat.jpg">
                 </div>
-                <form class="row align-items-end py-3  justify-content-center " name="addProduct<?php echo $producto->getIdProducto() ?>" action="cart.php" method="POST">
-                    <input type="hidden" name="idProducto" value="<?php echo $producto->getIdProducto() ?>"/>
-                    <input type="hidden" name="categoria" value="<?php echo $producto->getCategoria() ?>"/>
-                    <input class="col-md-3 col-xs-4 form-control" pattern="[1-9]{1,1}[0-9]*" type="text" name="cantidad" value="1" placeholder="cantidad" required/>
-                    <input class="col-md-4 col-xs-12 form-control btn btn-primary" type="submit" value="Lo quiero!" name="enviar"/>
-                </form>
             </div>
         </div>
-        <!--        <div class="py-5 product text-white col-xl-4 col-md-6 col-xs-12">
-                    <div class="row px-3">
-                        <div class="col-xl-6 col-xs-12">
-                            <h1 class="product-title">
-        <?php echo $producto->getNombre() ?>
-                            </h1>
-                        </div>
-                        <div class="col-xl-6 col-xs-12">
-                            <h1 class="product-price">
-                                $<?php echo $productoPromocion->getPrecioUnitario(); ?> MXN
-                            </h1>
-                        </div>
-                    </div>
-                    <div class="container description">
-                        <table class="table">
-                            <thead>
-                            <th>
-                                <span class=""><?php echo $producto->getDescripcion() ?></span>
-                            </th>
-                            </thead>
-                        </table>
-                    </div>
-                    <div class="container img-product">
-                        <img class="img-thumbnail img-fluid  " src="images/cat.jpg">
-                        <div class="btn-container">
-                            <a class="btn-add-cart" style=""><i class="fas fa-cart-plus"></i></a>
-                        </div>
-                    </div>
-                </div>-->
         <?php
     }
 

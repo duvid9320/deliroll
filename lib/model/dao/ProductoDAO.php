@@ -13,17 +13,23 @@ include_once 'lib/model/dto/Producto.php';
  * @author A. David Rodríguez C. <duvid9320@gmai.com>
  */
 class ProductoDAO {
+    private static $instance;
+    
+    private function __construct() {
+    }
+    
+    public static function getInstance() : ProductoDAO{
+        return is_null(self::$instance) ? (self::$instance = new ProductoDAO()) : self::$instance;
+    }
     
     public function getProductoById($id){
-        $productos = Connection::getInstance()->getDataObjects(
-                "SELECT * FROM Producto WHERE idProducto = '$id'", 
-                'Producto'
-                );
-        return $productos != null ? $productos[0] : null;
+        $stm = Connection::getInstance()->getPDO()->prepare("SELECT * FROM Producto WHERE idProducto = ?");
+        $stm->execute([$id]);
+        return $stm->fetchObject('Producto');
     }
     public function getProductosCategoria($categoria){
         return Connection::getInstance()->getDataObjects(
-                "select * from Producto where categoria = '$categoria'", 
+                "SELECT * from Producto WHERE idCategoria = '$categoria'", 
                 "Producto"
                 );
     }

@@ -12,10 +12,15 @@
  * @author A. David Rodríguez C. <duvid9320@gmai.com>
  */
 class ProductoPromocionDAO {
-    public function __construct() {
-        ;
+    private static $instance;
+    
+    private function __construct() {
     }
     
+    public static function getInstance() : ProductoPromocionDAO{
+        return is_null(self::$instance) ? (self::$instance = new ProductoPromocionDAO()) : self::$instance;
+    }
+
     public function getProductosPromocion($idPromocion){
         return Connection::getInstance()->getDataObjects(
                 "SELECT * FROM ProductoPromocion WHERE idPromocion = '$idPromocion'",
