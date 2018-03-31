@@ -19,4 +19,21 @@ class PromocionPedidoController {
         foreach ($promos as $promo) 
             $view->showPromo (unserialize ($promo));
     }
+    
+    public function showModifyPromos(array $promos) {
+        $view = new PromocionPedidoView();
+        foreach ($promos as $promo) 
+            $view->showModifyPromo (unserialize ($promo));
+    }
+    
+    public function getTotal(array $promos){
+        $total = doubleval(0.0);
+        foreach ($promos as $promo) 
+            $total+=$this->getPromo($promo)->getSubTotal ();
+        return $total;
+    }
+    
+    public function getPromo($serialized) : PromocionPedido{
+        return unserialize($serialized);
+    }
 }

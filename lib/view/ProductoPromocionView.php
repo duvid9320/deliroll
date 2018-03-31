@@ -14,36 +14,15 @@ include_once 'lib/model/dto/Producto.php';
  */
 class ProductoPromocionView {
 
-    public function showProductosPromocionTable(array $productosPromocion, int $cantidad) {
-        ?>
-        <table class="table bg-primary text-center text-white table-hover">
-            <thead class="bg-dark">
-                <tr>
-                    <th>Nombre</th>
-                    <th>Precio Unitario</th>
-                    <th>Cantidad</th>
-                    <th>Sub-total</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php
-                    foreach ($productosPromocion as $productoPromocion) 
-                        $this->showProductoPromocionTable($productoPromocion, $cantidad);
-                ?>
-            </tbody>
-        </table>
-        <?php
-    }
-
     public function showProductoPromocionTable(ProductoPromocion $productoPromocion, int $cantidad) {
         ?>
-<tr>
-    <td><?php echo $productoPromocion->getProducto()->getNombre();?></td>
-    <td><?php echo $productoPromocion->getPrecioUnitario();?></td>
-    <td><?php echo ($cantidad)?></td>
-    <td><?php echo $productoPromocion->getPrecioUnitario()*$cantidad;?></td>
-</tr>
-<?php
+        <tr>
+            <td><?php echo $productoPromocion->getProducto()->getNombre(); ?></td>
+            <td>$<?php echo $productoPromocion->getPrecioUnitario(); ?> MXN</td>
+            <td><?php echo ($cantidad) ?></td>
+            <td>$<?php echo $productoPromocion->getPrecioUnitario() * $cantidad; ?> MXN</td>
+        </tr>
+        <?php
     }
 
     public function showProductoPromocion(ProductoPromocion $productoPromocion) {

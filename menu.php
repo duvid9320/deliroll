@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <?php
 include_once 'lib/controller/MenuController.php';
+include_once 'lib/utils/drfunctions.php';
 ?>
 <html lang="es-mx">
     <head>
@@ -13,15 +14,9 @@ include_once 'lib/controller/MenuController.php';
         <?php
         include_once 'lib/modules/nav.php';
         ?>
-        <div class="container-fluid">
             <?php
-            $controller = new MenuController();
-            if (filter_has_var(INPUT_GET, 'categoria'))
-                $controller->showProductosCategoria(filter_input(INPUT_GET, 'categoria', FILTER_SANITIZE_NUMBER_INT));
-            else
-                $controller->showCategorias();
+                include_once 'lib/modules/menu/menu.php';
             ?>   
-        </div>
         <?php
         include_once 'lib/modules/footer.php';
         include_once 'lib/modules/footerScript.php';

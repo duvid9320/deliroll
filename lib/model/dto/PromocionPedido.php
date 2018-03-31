@@ -27,7 +27,7 @@ class PromocionPedido {
     }
     
     public function getSubTotal() {
-        return $this->cantidad * $this->getPromocion()->getTotal();
+        return doubleval($this->cantidad * $this->getPromocion()->getTotal());
     }
     
     public function getPedido() : Pedido {

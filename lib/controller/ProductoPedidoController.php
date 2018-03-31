@@ -17,7 +17,7 @@ class ProductoPedidoController {
     public function getTotal(array $productosPedido){
         $total = 0.0;
         foreach ($productosPedido as $productoPedido) 
-            $total += $this->getProductoPedido ($productoPedido)->getSubTotal ();
+            $total += $this->getProductoPedido($productoPedido)->getSubTotal ();
         return $total;
     }
     
@@ -25,11 +25,11 @@ class ProductoPedidoController {
         return unserialize($serialized);
     }
     
-    public function showProductosPedido(array $productosPedido) {
+    public function showTableProductosPedido(array $productosPedido) {
         $productoPedidoView = new ProductoPedidoView();
         ?>
-        <table class="table bg-primary text-center text-white table-hover">
-            <thead class="bg-dark">
+        <table class="table table-responsive-sm text-center table-bordered table-hover">
+            <thead class="bg-dark text-white">
                 <tr>
                     <th>Nombre</th>
                     <th>Precio</th>
@@ -42,6 +42,40 @@ class ProductoPedidoController {
                 foreach ($productosPedido as $productoPedido) 
                     $productoPedidoView->showProductoPedidoRow(unserialize($productoPedido));
                 ?>
+                <tr class="bg-primary text-center text-white">
+                    <td colspan="4">
+                        <h1>$<?php echo $this->getTotal($productosPedido)?> MXN</h1>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <?php
+    }
+ 
+    public function showTableModifyProductosPedido(array $productosPedido) {
+        $productoPedidoView = new ProductoPedidoView();
+        ?>
+        <table class="table table-responsive-sm text-center table-bordered table-hover">
+            <thead class="bg-dark text-white">
+                <tr>
+                    <th>¿Eliminar?</th>
+                    <th>Nombre</th>
+                    <th>Precio</th>
+                    <th>Sub-total</th>
+                    <th>Cantidad</th>
+                    <th>¿Modificar?</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php
+                foreach ($productosPedido as $productoPedido) 
+                    $productoPedidoView->showModifyProductoPedidoRow(unserialize($productoPedido));
+                ?>
+                <tr class="bg-primary text-center text-white">
+                    <td colspan="6">
+                        <h1>$<?php echo $this->getTotal($productosPedido)?> MXN</h1>
+                    </td>
+                </tr>
             </tbody>
         </table>
         <?php

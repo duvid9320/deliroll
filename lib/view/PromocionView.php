@@ -35,10 +35,10 @@ class PromocionView {
                     </div>
                     <h1 class="col text-center my-5 promo-title">Total promoción $<?php echo $promocion->getTotal()?> MXN (Cada una)</h1>
                 </div>
-                <form class="row align-items-end py-3 form-group justify-content-center p-5" name="addPromo<?php echo $promocion->getIdPromocion()?>" action="cart.php" method="POST">
+                <form class="row align-items-end py-3 form-group justify-content-center p-5" name="addPromo<?php echo $promocion->getIdPromocion()?>" action="promos.php" method="POST">
                     <input type="hidden" name="idPromo" value="<?php echo $promocion->getIdPromocion()?>"/>
                     <input class="col-xl-1 col-xs-12 form-control" pattern="[1-9]{1,1}[0-9]*" type="text" name="cantidad" value="1" placeholder="cantidad" required/>
-                    <button class="col-xl-3 col-xs-12 btn btn-primary" type="submit" name="enviar">
+                    <button class="col-xl-3 col-xs-12 btn btn-primary" type="submit" name="add-promo">
                         <i class="fas fa-cart-plus " > Agregar</i>
                     </button>
                 </form>

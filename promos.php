@@ -11,16 +11,9 @@ include_once 'lib/controller/PromocionController.php';
         <?php include_once 'lib/modules/header.php'; ?>
     </head>
     <body>
-        <?php include_once 'lib/modules/nav.php'; ?>
-
-        <div class="container-fluid">
-            <?php 
-                $promocionController = new PromocionController();
-                $promocionController->showPromociones();
-            ?>
-        </div>
-
-        <?php
+        <?php 
+        include_once 'lib/modules/nav.php';
+        include_once 'lib/modules/promos/promos.php';
         include_once 'lib/modules/footer.php';
         include_once 'lib/modules/footerScript.php';
         ?>

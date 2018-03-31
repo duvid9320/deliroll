@@ -3,14 +3,15 @@ include_once 'lib/model/dto/ProductoPedido.php';
 include_once 'lib/model/dto/PromocionPedido.php';
 session_start();
 
-if(isset($_SESSION['productos']))
-    foreach ($_SESSION['productos'] as $product) 
-        var_dump (unserialize ($product));
+function debugCart() {
+    if (isset($_SESSION['productos']))
+        foreach ($_SESSION['productos'] as $product)
+            var_dump(unserialize($product));
 
-if(isset($_SESSION['promos']))
-    foreach ($_SESSION['promos'] as $promo) 
-        var_dump (unserialize ($promo));
-
+    if (isset($_SESSION['promos']))
+        foreach ($_SESSION['promos'] as $promo)
+            var_dump(unserialize($promo));
+}
 
 function getProductCount() {
     return isset($_SESSION['productos']) ? count($_SESSION['productos']) : 0;
@@ -46,12 +47,11 @@ function getPromoCount() {
                     <i class="fas fa-shipping-fast"> Pedido</i>
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="pedidos.php">Modificar Pedido</a>
+                    <a class="dropdown-item" href="pedido.php?action=confirm">Confirmar Pedido</a>
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="eliminarAuto.jsp">Eliminar</a>
+                    <a class="dropdown-item" href="pedido.php?action=update">Modificar Pedido</a>
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="ConsultaAutos">Consultar</a>
-                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="pedido.php?action=delete">Eliminar Todo el Pedido</a>
                 </div>
             </li>
         </ul>

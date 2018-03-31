@@ -54,11 +54,11 @@ class ProductoView {
                 <div class="row align-items-end py-3 mh-1-5">
                     <img class="img-thumbnail img-fluid  " src="images/cat.jpg">
                 </div>
-                <form class="row align-items-end py-3  justify-content-center " name="addProduct<?php echo $producto->getIdProducto() ?>" action="cart.php" method="POST">
+                <form class="row align-items-end py-3  justify-content-center " name="addProduct<?php echo $producto->getIdProducto() ?>" action="menu.php?categoria=<?php echo $producto->getIdCategoria()?>" method="POST">
                     <input type="hidden" name="idProducto" value="<?php echo $producto->getIdProducto() ?>"/>
                     <input type="hidden" name="categoria" value="<?php echo $producto->getIdCategoria() ?>"/>
                     <input class="col-md-3 col-xs-4 form-control" pattern="[1-9]{1,1}[0-9]*" type="text" name="cantidad" value="1" placeholder="cantidad" required/>
-                    <button class="col-md-4 col-xs-12 btn btn-primary" type="submit" value="Lo quiero!" name="enviar">
+                    <button class="col-md-4 col-xs-12 btn btn-primary" type="submit" name="add-product">
                         <i class="fas fa-cart-plus"> Agregar</i>
                     </button>
                 </form>

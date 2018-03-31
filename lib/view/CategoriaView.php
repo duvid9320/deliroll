@@ -23,7 +23,7 @@ class CategoriaView {
         ?>
     <div class="category col-xl-4 col-md-6 col-xs-12">
         <img src="images/cat.jpg" alt= "<?php echo $categoria->getNombre()?>">
-        <a class="btn" href="menu.php?categoria=<?php echo $categoria->getIdCategoria();?>#menu"> <?php echo $categoria->getNombre();?></a>
+        <a class="btn" href="menu.php?categoria=<?php echo $categoria->getIdCategoria();?>"> <?php echo $categoria->getNombre();?></a>
         </div>
         <?php
     }
