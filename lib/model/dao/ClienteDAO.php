@@ -60,7 +60,7 @@ class ClienteDAO extends GenericDAO {
     public function readClientByPhone($phone): Cliente {
         try {
             $stm = parent::getConn()->getPDO()->prepare("SELECT * FROM Cliente WHERE telefono = ?");
-            if ($stm->execute([$phone]))
+            if ($stm->execute([$phone]) && $stm->rowCount() > 0)
                 return $stm->fetchObject("Cliente");
         } catch (Exception $exc) {
             echo $exc->getTraceAsString();
