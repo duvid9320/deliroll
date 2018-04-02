@@ -11,10 +11,11 @@
  *
  * @author A. David Rodríguez C. <duvid9320@gmai.com>
  */
-class ProductoPromocionDAO {
+class ProductoPromocionDAO extends GenericDAO{
     private static $instance;
     
     private function __construct() {
+        parent::__construct();
     }
     
     public static function getInstance() : ProductoPromocionDAO{
@@ -22,9 +23,6 @@ class ProductoPromocionDAO {
     }
 
     public function getProductosPromocion($idPromocion){
-        return Connection::getInstance()->getDataObjects(
-                "SELECT * FROM ProductoPromocion WHERE idPromocion = '$idPromocion'",
-                'ProductoPromocion'
-                );
+        return parent::getConn()->getDataObjects("SELECT * FROM ProductoPromocion WHERE idPromocion = '$idPromocion'",'ProductoPromocion');
     }
 }

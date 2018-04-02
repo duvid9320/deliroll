@@ -1,4 +1,5 @@
 <?php
+
 include_once 'lib/model/dto/Promocion.php';
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -11,23 +12,33 @@ include_once 'lib/model/dto/Promocion.php';
  *
  * @author A. David Rodríguez C. <duvid9320@gmai.com>
  */
-class PromocionDAO {
+class PromocionDAO extends GenericDAO {
+
     private static $instance;
-    
+
     private function __construct() {
+        parent::__construct();
     }
-    
+
     public function getPromocionById($id) {
-        $stm = Connection::getInstance()->getPDO()->prepare("SELECT * FROM Promocion WHERE idPromocion = ?");
-        $stm->execute([$id]);
-        return $stm->fetchObject('Promocion');
+        try {
+            $stm = parent::getConn()->getPDO()->prepare("SELECT * FROM Promocion WHERE idPromocion = ?");
+            $stm->execute([$id]);
+            return $stm->fetchObject('Promocion');
+        } catch (Exception $exc) {
+            echo $exc->getTraceAsString();
+        } finally {
+            $stm->closeCursor();
+            parent::closeConnection();
+        }
     }
-    
-    public static function getInstance() : PromocionDAO{
+
+    public static function getInstance(): PromocionDAO {
         return is_null(self::$instance) ? (self::$instance = new PromocionDAO()) : self::$instance;
     }
-    
-    public function getPromociones(){
-        return Connection::getInstance()->getDataObjects("SELECT * FROM Promocion", "Promocion");
+
+    public function getPromociones() {
+        return parent::getConn()->getDataObjects("SELECT * FROM Promocion", "Promocion");
     }
+
 }

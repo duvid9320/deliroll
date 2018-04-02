@@ -18,9 +18,19 @@ class Connection {
     private static $password = 'admin';
     private static $connection;
     private $pdo;
+    private $transaction;
 
     private function __construct() {
         $this->setPDO();
+    }
+    
+    public function beginTransaction() {
+        $this->getPDO()->beginTransaction();
+        $this->transaction = true;
+    }
+    
+    public function endTransaction() {
+        $this->transaction = false;
     }
 
     private function setPDO() {
@@ -28,40 +38,68 @@ class Connection {
             $this->pdo = new PDO(Connection::$dns, Connection::$user, Connection::$password);
             $this->pdo->query("SET NAMES 'utf8'");
         } catch (PDOException $e) {
-            Connection::$connection = null;
-            echo 'Error al conectar <br>' . $e->getMessage();
+            self::$connection = null;
+            echo 'Error al conectar <br>' . $e->getTraceAsString();
         }
     }
     
     public function getPDO() : PDO{
+        if(is_null($this->pdo))
+            $this->setPDO ();
         return $this->pdo;
     }
 
+    public function closeConnection() {
+        if(!$this->transaction)
+            $this->pdo = null;
+    }
+    
     public function getDataObjects($sql, $className): array {
-        $result = $this->getResult($sql);
-        $result->setFetchMode(PDO::FETCH_CLASS, $className);
-        return $result->fetchAll();
+        try {
+            $result = $this->getResult($sql);
+            $result->setFetchMode(PDO::FETCH_CLASS, $className);
+            return $result->fetchAll();
+        } catch (Exception $exc) {
+            echo $exc->getTraceAsString();
+        } finally {
+            $result->closeCursor();
+        }
+    }
+
+    public function getDataObject($sql, $className) {
+        try {
+            $stm = $this->getResult($sql);
+            return $stm->fetchObject($className);
+        } catch (Exception $exc) {
+            echo $exc->getTraceAsString();
+        } finally {
+            $stm->closeCursor();
+        }
     }
 
     public function getResult($sql): PDOStatement {
         try {
-            return $this->pdo != null ? $this->pdo->query($sql) : null;
+            return $this->getPDO()->query($sql);
         } catch (Exception $ex) {
-            echo $ex->getMessage();
+            echo $ex->getTraceAsString();
+        } finally {
+            $this->closeConnection();
         }
     }
 
     public function executeSQL($sql) : bool{
         try {
-            return $this->pdo != null ? $this->pdo->exec($sql) > 0 : false;
+            $stm = $this->getPDO()->prepare($sql);
+            return $stm->execute() && $stm->rowCount() > 0;
         } catch (Exception $ex) {
-            echo $ex->getMessage();
+            echo $ex->getTraceAsString();
+        } finally {
+            $stm->closeCursor();
         }
     }
 
     public static function getInstance(): Connection {
-        Connection::$connection = Connection::$connection != null ? Connection::$connection : new Connection();
-        return Connection::$connection;
+        return is_null(self::$connection) ? (self::$connection = new Connection()) : self::$connection; 
     }
 
 }

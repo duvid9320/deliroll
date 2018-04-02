@@ -1,5 +1,6 @@
 <?php
 include_once 'lib/utils/drfunctions.php';
+include_once 'lib/controller/PromocionPedidoController.php';
 update();
 showUpdateForms();
 
@@ -23,14 +24,7 @@ function updatePromo($id, $cantidad) {
         if (getPromo($promo)->getIdPromocion() == $id) {
             $promo = getPromo($promo);
             $_SESSION['promos'][$key] = serialize($promo->setCantidad($cantidad));
-            ?>
-            <div class="text-center alert alert-success alert-dismissible fade show" role="alert">
-                <strong>La promoción se ha modificado en el pedido!</strong> cantidad de promociones en el pedido: <?php echo $promo->getCantidad()?>
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <?php
+            showSuccessAlert("La promoción se ha modificado en el pedido!","cantidad de promociones en el pedido: ".$promo->getCantidad());
         }
 }
 
@@ -40,14 +34,7 @@ function deletePromo($id) {
     foreach ($_SESSION['promos'] as $key => $producto)
         if (getPromo($producto)->getIdPromocion() == $id) {
             unset($_SESSION['promos'][$key]);
-            ?>
-            <div class="text-center alert alert-danger alert-dismissible fade show" role="alert">
-                <strong>La promoción se ha eliminado del pedido!</strong>
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <?php
+            showDangerAlert("La promoción se ha eliminado del pedido!", "");
         }
     if (empty($_SESSION['promos']))
         unset($_SESSION['promos']);
@@ -63,14 +50,7 @@ function deleteProduct($id) {
     foreach ($_SESSION['productos'] as $key => $producto)
         if (getProduct($producto)->getIdProducto() == $id) {
             unset($_SESSION['productos'][$key]);
-            ?>
-            <div class="text-center alert alert-danger alert-dismissible fade show" role="alert">
-                <strong>El producto <?php echo getProduct($producto)->getProducto()->getNombre()?> se ha eliminado del pedido!</strong>
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <?php
+            showDangerAlert("El producto ".getProduct($producto)->getProducto()->getNombre()." se ha eliminado del pedido!", "");
         }
     if (empty($_SESSION['productos']))
         unset($_SESSION['productos']);
@@ -83,14 +63,7 @@ function updateProduct($id, $cantidad) {
         if (getProduct($producto)->getIdProducto() == $id) {
             $producto = getProduct($producto);
             $_SESSION['productos'][$key] = serialize($producto->setCantidad($cantidad));
-            ?>
-            <div class="text-center alert alert-success alert-dismissible fade show" role="alert">
-                <strong>El pedido se ha modificado!</strong> <?php echo $producto->getCantidad()?> producto(s) <?php echo $producto->getProducto()->getNombre()?> en el pedido
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <?php
+            showSuccessAlert("El pedido se ha modificado!", $producto->getCantidad()." producto(s) ".$producto->getProducto()->getNombre()." en el pedido");
         }
 }
 
@@ -99,35 +72,18 @@ function getProduct($serialized) : ProductoPedido{
 }
 
 function showUpdateForms() {
-    $productoPedidoController = new ProductoPedidoController();
-    $promocionPedidoController = new PromocionPedidoController();
-    $total = doubleval(0);
-    $productos = &$_SESSION['productos'];
-    $promos = &$_SESSION['promos'];
-    $total += is_null($productos) ? 0.0 : $productoPedidoController->getTotal($productos);
-    $total += is_null($promos) ? 0.0 : $promocionPedidoController->getTotal($promos);
+$productoPedidoController = new ProductoPedidoController(getSessionVarOrElseNull('productos'));
+$promocionPedidoController = new PromocionPedidoController(getSessionVarOrElseNull('promos'));
     ?>
     <div class="container my-5">
         <h1 class="text-center ">Modificar el Pedido</h1>
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-xl-12 col-xs-12">
-                    <?php
-                    if (!is_null($productos) && !empty($productos)) {
+                    <?php 
+                        $productoPedidoController->showTableModifyProductosPedido(); 
+                        $promocionPedidoController->showModifyPromos(); 
                         ?>
-                        <div class="col-12">
-                            <h2 class="text-center">Productos</h2>
-                            <?php $productoPedidoController->showTableModifyProductosPedido($productos); ?>
-                        </div>
-                        <?php
-                    } if (!is_null($promos) && !empty($promos)) {
-                        ?>
-                        <div class="col-12">
-                            <h2 class="text-center">Promociones</h2>
-                            <?php $promocionPedidoController->showModifyPromos($promos); ?>
-                        </div>
-                    <?php }
-                    ?>
                 </div>
 
             </div>

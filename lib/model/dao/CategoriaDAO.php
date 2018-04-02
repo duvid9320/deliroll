@@ -1,6 +1,7 @@
 <?php
 include_once 'lib/connection/Connection.php';
 include_once 'lib/model/dto/Categoria.php';
+include_once 'lib/model/dao/GenericDAO.php';
 
 
 /*
@@ -14,10 +15,11 @@ include_once 'lib/model/dto/Categoria.php';
  *
  * @author A. David Rodríguez C. <duvid9320@gmai.com>
  */
-class CategoriaDAO {
+class CategoriaDAO extends GenericDAO{
     private static $instance;
     
     private function __construct() {
+        parent::__construct();
     }
     
     public static function getInstance() : CategoriaDAO{
@@ -25,12 +27,19 @@ class CategoriaDAO {
     }    
     
     public function getCategoriaById($id){
-        $stm = Connection::getInstance()->getPDO()->prepare("SELECT * FROM Categoria WHERE idCategoria = ?");
-        $stm->execute([$id]);
-        return $stm->fetchObject('Categoria');
+        try {
+            $stm = $this->getConn()->getPDO()->prepare("SELECT * FROM Categoria WHERE idCategoria = ?");
+            $stm->execute([$id]);
+            return $stm->fetchObject('Categoria');
+        } catch (Exception $exc) {
+            echo $exc->getTraceAsString();
+        } finally {
+            $stm->closeCursor();
+            parent::closeConnection();
+        }
     }
     
     public function getAll(){
-        return Connection::getInstance()->getDataObjects("select * from Categoria","Categoria");
+        return parent::getConn()->getDataObjects("select * from Categoria","Categoria");
     }
 }

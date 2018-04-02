@@ -26,7 +26,7 @@ class ProductoPedido {
     }
     
     public function getSubTotal() {
-        return $this->getProducto()->getPrecio() * $this->getCantidad();
+        return doubleval($this->getProducto()->getPrecio() * $this->getCantidad());
     }
     
     public function getProducto() : Producto{
