@@ -87,15 +87,12 @@ class PedidoController {
     }
     
     private function confirmPedido() {
-        $clientController = new ClienteController();
-            echo $this->getClient();
+        $clientController = new ClienteController(); 
         try {
             if(isEmpty($this->getClient()->getIdCliente()))
                 $clientController->createClient($this->client);
             $this->getPedido()->setIdCliente($this->getClient()->getIdCliente());
-            $this->createPedido();
-            echo $this->getPedido();
-            echo $this->getClient();
+            $this->createPedido(); 
             return true;
         } catch (Exception $exc) {
             echo $exc->getMessage()."<br>".$exc->getTraceAsString()."<br>";
