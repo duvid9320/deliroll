@@ -68,6 +68,7 @@ class ClienteDAO extends GenericDAO {
             $stm->closeCursor();
             parent::closeConnection();
         }
+        return new Cliente();
     }
 
     public function updateClient(Cliente $cliente) {
