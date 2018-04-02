@@ -70,22 +70,32 @@ class PedidoController {
         return true;
     }
     
-    private function insertAll() {
-        $inserted = boolval(true);
+    private function insertAll(){
+        return $this->insertProducts() && $this->insertPromos();
+    }
+    
+    private function insertProducts() {
         if($this->productoPedidoController->hasProducts())
-            $inserted =  $inserted && $this->productoPedidoController->registerProductsPedido ($this->getPedido ()->getIdPedido());
+            return $this->productoPedidoController->registerProductsPedido ($this->getPedido ()->getIdPedido());
+        return true;
+    }
+    
+    private function insertPromos() {
         if($this->promocionPedidoController->hasPromos())
-            $inserted = $inserted && $this->promocionPedidoController->registerPromocionesPedido($this->getPedido()->getIdPedido());
-        return $inserted;
+            return $this->promocionPedidoController->registerPromocionesPedido($this->getPedido()->getIdPedido());
+        return true;
     }
     
     private function confirmPedido() {
         $clientController = new ClienteController();
+            echo $this->getClient();
         try {
             if(isEmpty($this->getClient()->getIdCliente()))
                 $clientController->createClient($this->client);
             $this->getPedido()->setIdCliente($this->getClient()->getIdCliente());
             $this->createPedido();
+            echo $this->getPedido();
+            echo $this->getClient();
             return true;
         } catch (Exception $exc) {
             echo $exc->getMessage()."<br>".$exc->getTraceAsString()."<br>";
@@ -136,7 +146,7 @@ class PedidoController {
             $dbClient = ClienteDAO::getInstance ()->getOrUpdate ($this->getClient());
         else if(!isEmpty($this->getClient()->getTelefono()))
             $dbClient = ClienteDAO::getInstance ()->readClientByPhone ($this->getClient ()->getTelefono ());
-        if(!is_null($dbClient))
+        if(!is_null($dbClient) && !isEmpty($dbClient->getIdCliente()))
             $this->client = $dbClient;
     }
 

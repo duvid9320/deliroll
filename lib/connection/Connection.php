@@ -13,7 +13,7 @@
  */
 class Connection {
 
-    private static $dns = 'mysql:dbname=daverdz_deliroll;host=65.19.141.67';
+    private static $dns = 'mysql:dbname=daverdz_deliroll;host=127.0.0.1'; //65.19.141.67
     private static $user = 'daverdz_deliroll';
     private static $password = 'delirollitz';
     private static $connection;
