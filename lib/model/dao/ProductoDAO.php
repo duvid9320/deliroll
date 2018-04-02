@@ -17,7 +17,7 @@ class ProductoDAO extends GenericDAO {
 
     private static $instance;
 
-    private function __construct() {
+    public function __construct() {
         parent::__construct();
     }
 
