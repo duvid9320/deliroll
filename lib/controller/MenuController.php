@@ -1,7 +1,5 @@
 <?php
-
 include_once 'lib/model/dao/CategoriaDAO.php';
-include_once 'lib/view/CategoriaView.php';
 include_once 'lib/view/ProductoView.php';
 include_once 'lib/model/dao/ProductoDAO.php';
 /*
@@ -16,13 +14,57 @@ include_once 'lib/model/dao/ProductoDAO.php';
  * @author A. David Rodríguez C. <duvid9320@gmai.com>
  */
 class MenuController {
-    public function showCategorias(){
-        $view = new CategoriaView();
-        $view->showCategorias(CategoriaDAO::getInstance()->getAll());
+
+    public function showMenuCategorias() {
+        $categorias = CategoriaDAO::getInstance()->getAll();
+        ?>
+        <div class="sidenav bg-b">
+            <?php foreach ($categorias AS $categoria) { ?>
+                <a href="#<?php echo $this->castCategoria($categoria)->getNombre() ?>"><?php echo $this->castCategoria($categoria)->getNombre() ?></a>
+            <?php } ?>
+        </div>
+        <?php
     }
-    
-    public function showProductosCategoria($idCategoria){
-        $view = new ProductoView();
-        $view->showProductos(ProductoDAO::getInstance()->getProductosCategoria($idCategoria));
+
+    public function showSubMenuCategorias() {
+        $categorias = CategoriaDAO::getInstance()->getAll();
+        foreach ($categorias AS $categoria) {
+            ?>
+            <div class="container-fluid" id="<?php echo $this->castCategoria($categoria)->getNombre() ?>">
+                <div class=" text-center col-md-12 col-xl-12 col-xs-12 tag bg-4">
+                    <h3><?php echo $this->castCategoria($categoria)->getNombre() ?></h3>
+                </div>
+                <div class="row ml-0">
+                    <?php $this->showProductos($categoria); ?>
+                </div>
+            </div>
+            <?php
+        }
     }
+
+    private function showProductos(Categoria $categoria) {
+        $productos = ProductoDAO::getInstance()->getProductosCategoria($categoria->getIdCategoria());
+        foreach ($productos as $producto) {?>
+            <div class="col-sm-4 col-lg-2 img-col prl-0 my-2">
+                <img src="images/s1.png" alt="" class="img-product">
+            </div>
+            <div class="col-sm-8 col-lg-4 my-2">
+                
+                    <h3><?php echo $this->castProducto($producto)->getNombre() ?></h3>
+                <h4> $<?php echo $this->castProducto($producto)->getPrecio()?> MXN</h4>
+                <?php echo $this->castProducto($producto)->getDescripcion() ?>
+            </div>
+            
+<?php
+        }
+    }
+
+    private function castProducto($object): Producto {
+        return $object;
+    }
+
+    private function castCategoria($object): Categoria {
+        return $object;
+    }
+
 }

@@ -16,7 +16,7 @@ class ProductoView {
 
     public function showProductos(array $productos) {
         ?>
-        <div class="row justify-content-center bg-dark" id="menu">
+        <div class="row justify-content-center" id="menu">
             <?php
             foreach ($productos as $producto) {
                 $this->showProducto($producto);
