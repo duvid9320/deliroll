@@ -43,10 +43,10 @@ class MenuController {
     }
 
     private function showProductos(Categoria $categoria) {
-        $productos = ProductoDAO::getInstance()->getProductosCategoria($categoria->getIdCategoria());
+        $productos = ProductoDAO::getInstance()->getArticulosDisponiblesByCategoria($categoria->getIdCategoria());
         foreach ($productos as $producto) {?>
             <div class="col-sm-4 col-lg-2 img-col prl-0 my-2">
-                <img src="images/s1.png" alt="" class="img-product">
+                <img src="<?php echo $this->castProducto($producto)->getRuta()?>" alt="" class="img-product">
             </div>
             <div class="col-sm-8 col-lg-4 my-2">
                 
@@ -59,7 +59,7 @@ class MenuController {
         }
     }
 
-    private function castProducto($object): Producto {
+    private function castProducto($object): Articulo {
         return $object;
     }
 

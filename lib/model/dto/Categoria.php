@@ -15,7 +15,6 @@ class Categoria {
     private $idCategoria;
     private $nombre;
     private $descripcion;
-    private $imagen;
     
     public function __construct() {
     }

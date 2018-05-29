@@ -1,7 +1,7 @@
 <?php
 
 include_once 'lib/connection/Connection.php';
-include_once 'lib/model/dto/Producto.php';
+include_once 'lib/model/dto/Articulo.php';
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -27,9 +27,9 @@ class ProductoDAO extends GenericDAO {
 
     public function getProductoById($id) {
         try {
-            $stm = parent::getConn()->getPDO()->prepare("SELECT * FROM Producto WHERE idProducto = ?");
+            $stm = parent::getConn()->getPDO()->prepare("SELECT * FROM Producto WHERE id = ?");
             $stm->execute([$id]);
-            return $stm->fetchObject('Producto');
+            return $stm->fetchObject('Articulo');
         } catch (Exception $exc) {
             echo $exc->getTraceAsString();
         } finally {
@@ -38,8 +38,8 @@ class ProductoDAO extends GenericDAO {
         }
     }
 
-    public function getProductosCategoria($categoria) {
-        return parent::getConn()->getDataObjects("SELECT * from Producto WHERE idCategoria = '$categoria'", "Producto");
+    public function getArticulosDisponiblesByCategoria($categoria) {
+        return parent::getConn()->getDataObjects("SELECT * from Producto WHERE id = '$categoria'", "Articulo");
     }
 
 }

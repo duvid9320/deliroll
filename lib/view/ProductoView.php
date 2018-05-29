@@ -26,7 +26,7 @@ class ProductoView {
         <?php
     }
 
-    public function showProducto(Producto $producto) {
+    public function showProducto(Articulo $producto) {
         ?>
         <div class="product mh-100 text-white col-xl-4 col-md-6 col-xs-12 pt-4">
             <div class="container px-4">
