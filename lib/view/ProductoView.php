@@ -1,5 +1,5 @@
 <?php
-include_once 'lib/model/dto/Producto.php';
+include_once 'lib/model/dto/Articulo.php';
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -16,7 +16,7 @@ class ProductoView {
 
     public function showProductos(array $productos) {
         ?>
-        <div class="row justify-content-center bg-dark" id="menu">
+        <div class="row justify-content-center" id="menu">
             <?php
             foreach ($productos as $producto) {
                 $this->showProducto($producto);
@@ -26,7 +26,7 @@ class ProductoView {
         <?php
     }
 
-    public function showProducto(Producto $producto) {
+    public function showProducto(Articulo $producto) {
         ?>
         <div class="product mh-100 text-white col-xl-4 col-md-6 col-xs-12 pt-4">
             <div class="container px-4">

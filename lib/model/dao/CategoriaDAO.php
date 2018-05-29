@@ -28,7 +28,7 @@ class CategoriaDAO extends GenericDAO{
     
     public function getCategoriaById($id){
         try {
-            $stm = $this->getConn()->getPDO()->prepare("SELECT * FROM Categoria WHERE idCategoria = ?");
+            $stm = $this->getConn()->getPDO()->prepare("SELECT * FROM categoria WHERE id = ?");
             $stm->execute([$id]);
             return $stm->fetchObject('Categoria');
         } catch (Exception $exc) {
@@ -40,6 +40,6 @@ class CategoriaDAO extends GenericDAO{
     }
     
     public function getAll(){
-        return parent::getConn()->getDataObjects("select * from Categoria","Categoria");
+        return parent::getConn()->getDataObjects("select * from categoria","Categoria");
     }
 }

@@ -12,16 +12,15 @@
  * @author A. David Rodríguez C. <duvid9320@gmai.com>
  */
 class Categoria {
-    private $idCategoria;
+    private $id;
     private $nombre;
     private $descripcion;
-    private $imagen;
     
     public function __construct() {
     }
     
     function getIdCategoria() {
-        return $this->idCategoria;
+        return $this->id;
     }
 
     function getNombre() {

@@ -7,10 +7,9 @@
         <?php include_once 'lib/modules/header.php'; ?>
     </head>
     <body>
-        <?php 
+        <?php
             include_once 'lib/modules/nav.php';
             include_once 'lib/modules/banner.php';
-            include_once 'lib/modules/indexContent.php';
             include_once 'lib/modules/footer.php';
             include_once 'lib/modules/footerScript.php';
         ?>
