@@ -1,5 +1,5 @@
 <?php
-include_once 'lib/model/dto/Producto.php';
+include_once 'lib/model/dto/Articulo.php';
 
 /*
  * To change this license header, choose License Headers in Project Properties.

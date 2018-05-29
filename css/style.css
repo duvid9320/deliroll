@@ -106,6 +106,8 @@ li.nav-item > a:hover{
     font-family: "SpaceMono-Italic";
 }
 .img-product{
+    max-width: 100%;
+    height: auto;
     position: relative;
     padding-top: 2px;
     padding-bottom: 2px;

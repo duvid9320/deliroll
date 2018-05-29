@@ -1,7 +1,7 @@
 <?php
 include_once 'lib/model/dao/CategoriaDAO.php';
 include_once 'lib/view/ProductoView.php';
-include_once 'lib/model/dao/ProductoDAO.php';
+include_once 'lib/model/dao/ArticuloDAO.php';
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -35,7 +35,7 @@ class MenuController {
                     <h3><?php echo $this->castCategoria($categoria)->getNombre() ?></h3>
                 </div>
                 <div class="row ml-0">
-                    <?php $this->showProductos($categoria); ?>
+                    <?php $this->showProductos($categoria);?>
                 </div>
             </div>
             <?php
@@ -46,13 +46,13 @@ class MenuController {
         $productos = ProductoDAO::getInstance()->getArticulosDisponiblesByCategoria($categoria->getIdCategoria());
         foreach ($productos as $producto) {?>
             <div class="col-sm-4 col-lg-2 img-col prl-0 my-2">
-                <img src="<?php echo $this->castProducto($producto)->getRuta()?>" alt="" class="img-product">
+                <img src="backend/<?php echo $this->castProducto($producto)->getRuta()?>" alt="" class="img-thumbnail img-fluid img-product">
             </div>
             <div class="col-sm-8 col-lg-4 my-2">
                 
-                    <h3><?php echo $this->castProducto($producto)->getNombre() ?></h3>
+                <h3><?php echo $this->castProducto($producto)->getTitulo() ?></h3>
                 <h4> $<?php echo $this->castProducto($producto)->getPrecio()?> MXN</h4>
-                <?php echo $this->castProducto($producto)->getDescripcion() ?>
+                <?php echo $this->castProducto($producto)->getContenido()?>
             </div>
             
 <?php

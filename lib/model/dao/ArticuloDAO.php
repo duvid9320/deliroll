@@ -27,7 +27,7 @@ class ProductoDAO extends GenericDAO {
 
     public function getProductoById($id) {
         try {
-            $stm = parent::getConn()->getPDO()->prepare("SELECT * FROM Producto WHERE id = ?");
+            $stm = parent::getConn()->getPDO()->prepare("SELECT * FROM articulos WHERE id = ?");
             $stm->execute([$id]);
             return $stm->fetchObject('Articulo');
         } catch (Exception $exc) {
@@ -39,7 +39,7 @@ class ProductoDAO extends GenericDAO {
     }
 
     public function getArticulosDisponiblesByCategoria($categoria) {
-        return parent::getConn()->getDataObjects("SELECT * from Producto WHERE id = '$categoria'", "Articulo");
+        return parent::getConn()->getDataObjects("SELECT * from articulos WHERE idCategoria = '$categoria' AND estado = '1'", "Articulo");
     }
 
 }

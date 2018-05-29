@@ -22,7 +22,7 @@
                 <a class="nav-link" href="contacto.php">CONTACTO</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="CMS/backend/index.php">ADMINISTRAR</a>
+                <a class="nav-link" href="backend/index.php">ADMINISTRAR</a>
             </li>
         </ul>
     </div>
