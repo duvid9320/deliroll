@@ -1,22 +1,25 @@
 <?php
 
-class Slide{
+class Slide {
 
-	public function seleccionarSlideController(){
+    public function seleccionarSlideController() {
 
-		$respuesta = SlideModels::seleccionarSlideModel("slide");
+        $respuesta = SlideModels::seleccionarSlideModel("slide");
 
-		foreach ($respuesta as $row => $item){
+        foreach ($respuesta as $row => $item) {
 
-			echo ' <li>
-	           	   	<img src="backend/'.substr($item["ruta"], 6).'">
+            echo ' <li>
+	           	   	<img src="backend/' . substr($item["ruta"], 6) . '">
 	           	   	<div class="slideCaption">
-	           	   		<h3>'.$item["titulo"].'</h3>
-			   	   		<p>'.$item["descripcion"].'</p>
+	           	   		<h3>' . $item["titulo"] . '</h3>
+			   	   		<p>' . $item["descripcion"] . '</p>
 	           	   	</div>
 	               </li>';
+        }
+    }
+    
+    public function slideExists(){
+        return !is_null(SlideModels::seleccionarSlideModel("slide"));
+    }
 
-		}
-
-	}
 }

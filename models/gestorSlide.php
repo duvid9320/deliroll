@@ -15,5 +15,4 @@ class SlideModels{
 		$stmt->close();
 
 	}
-
 }

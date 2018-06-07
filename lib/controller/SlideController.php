@@ -1,0 +1,42 @@
+<?php
+
+include_once 'lib/model/dto/Slide.php';
+include_once 'lib/model/dao/SlideDAO.php';
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+/**
+ * Description of SlideController
+ *
+ * @author Dave
+ */
+class SlideController {
+
+    public function showSlide() {
+        ?>
+        <div class = "carousel slide " data-ride = "carousel" data-interval = "4500" data-pause = "false" >
+            <div class = "carousel-inner">
+                <?php
+                $imagenesSlide = SlideDAO::getInstance()->getImages();
+                foreach ($imagenesSlide as $imagen) {
+                    ?>
+                    <div class="carousel-item active">
+                        <img class="d-block img-rs " src="<?php echo $this->castSlide($imagen)->getRuta() ?>">
+                    </div>
+
+                    <?php
+                }
+                ?>
+            </div>
+        </div>
+        <?php
+    }
+
+    private function castSlide($object): Slide {
+        return $object;
+    }
+
+}

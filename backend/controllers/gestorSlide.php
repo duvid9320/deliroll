@@ -1,138 +1,125 @@
 <?php
 
-class GestorSlide{
+class GestorSlide {
+    #MOSTRAR IMAGEN SLIDE AJAX
+    #------------------------------------------------------------
 
-	#MOSTRAR IMAGEN SLIDE AJAX
-	#------------------------------------------------------------
+    public function mostrarImagenController($datos) {
 
-	public function mostrarImagenController($datos){
+        #getimagesize - Obtiene el tamaño de una imagen
+        #LIST(): Al igual que array(), no es realmente una función, es un constructor del lenguaje. list() se utiliza para asignar una lista de variables en una sola operación.
 
-		#getimagesize - Obtiene el tamaño de una imagen
+        list($ancho, $alto) = getimagesize($datos["imagenTemporal"]);
 
-		#LIST(): Al igual que array(), no es realmente una función, es un constructor del lenguaje. list() se utiliza para asignar una lista de variables en una sola operación.
+        if ($ancho < 1600 || $alto < 600) {
 
-		list($ancho, $alto) = getimagesize($datos["imagenTemporal"]);
-		
-		if($ancho < 1600 || $alto < 600){
+            echo 0;
+        } else {
 
-			echo 0;
+            $aleatorio = mt_rand(100, 999);
 
-		}
+            $ruta = "../../views/images/slide/slide" . $aleatorio . ".jpg";
 
-		else{
+            #imagecreatefromjpeg — Crea una nueva imagen a partir de un fichero o de una URL
 
-			$aleatorio = mt_rand(100, 999);
+            $origen = imagecreatefromjpeg($datos["imagenTemporal"]);
 
-			$ruta = "../../views/images/slide/slide".$aleatorio.".jpg";
+            #imagecrop() — Recorta una imagen usando las coordenadas, el tamaño, x, y, ancho y alto dados
 
-			#imagecreatefromjpeg — Crea una nueva imagen a partir de un fichero o de una URL
+            $destino = imagecrop($origen, ["x" => 0, "y" => 0, "width" => 1600, "height" => 600]);
 
-			$origen = imagecreatefromjpeg($datos["imagenTemporal"]);
+            #imagejpeg() — Exportar la imagen al navegador o a un fichero
 
-			#imagecrop() — Recorta una imagen usando las coordenadas, el tamaño, x, y, ancho y alto dados
+            imagejpeg($destino, $ruta);
 
-			$destino = imagecrop($origen, ["x"=>0, "y"=>0, "width"=>1600, "height"=>600]);
+            GestorSlideModel::subirImagenSlideModel($ruta, "slide");
 
-			#imagejpeg() — Exportar la imagen al navegador o a un fichero
+            $respuesta = GestorSlideModel::mostrarImagenSlideModel($ruta, "slide");
 
-			imagejpeg($destino, $ruta);
+            $enviarDatos = array("ruta" => $respuesta["ruta"],
+                "titulo" => $respuesta["titulo"],
+                "descripcion" => $respuesta["descripcion"]);
 
-			GestorSlideModel::subirImagenSlideModel($ruta, "slide");
+            echo json_encode($enviarDatos);
+        }
+    }
 
-			$respuesta = GestorSlideModel::mostrarImagenSlideModel($ruta, "slide");
+    #MOSTRAR IMAGENES EN LA VISTA
+    #------------------------------------------------------------
 
-			$enviarDatos = array("ruta"=>$respuesta["ruta"],
-				                 "titulo"=>$respuesta["titulo"],
-				                 "descripcion"=>$respuesta["descripcion"]);
+    public function mostrarImagenVistaController() {
 
-			echo json_encode($enviarDatos);
-		}
+        $respuesta = GestorSLideModel::mostrarImagenVistaModel("slide");
 
-	}
+        foreach ($respuesta as $row => $item) {
 
-	#MOSTRAR IMAGENES EN LA VISTA
-	#------------------------------------------------------------
+            echo '<li id="' . $item["id"] . '" class="bloqueSlide"><span class="fa fa-times eliminarSlide" ruta="' . $item["ruta"] . '"></span><img src="' . substr($item["ruta"], 6) . '" class="handleImg"></li>';
+        }
+    }
 
-	public function mostrarImagenVistaController(){
+    #MOSTRAR IMAGENES EN EL EDITOR
+    #------------------------------------------------------------
 
-		$respuesta = GestorSLideModel::mostrarImagenVistaModel("slide");
+    public function editorSlideController() {
 
-		foreach($respuesta as $row => $item){
+        $respuesta = GestorSLideModel::mostrarImagenVistaModel("slide");
 
-			echo '<li id="'.$item["id"].'" class="bloqueSlide"><span class="fa fa-times eliminarSlide" ruta="'.$item["ruta"].'"></span><img src="'.substr($item["ruta"], 6).'" class="handleImg"></li>';
+        foreach ($respuesta as $row => $item) {
 
-		}
-
-	}
-
-	#MOSTRAR IMAGENES EN EL EDITOR
-	#------------------------------------------------------------
-
-	public function editorSlideController(){
-
-		$respuesta = GestorSLideModel::mostrarImagenVistaModel("slide");
-
-		foreach($respuesta as $row => $item){
-
-			echo '<li id="item'.$item["id"].'">
+            echo '<li id="item' . $item["id"] . '">
 					<span class="fa fa-pencil editarSlide" style="background:blue"></span>
-					<img src="'.substr($item["ruta"], 6).'" style="float:left; margin-bottom:10px" width="80%">
-					<h1>'.$item["titulo"].'</h1>
-					<p>'.$item["descripcion"].'</p>
+					<img src="' . substr($item["ruta"], 6) . '" style="float:left; margin-bottom:10px" width="80%">
+					<h1>' . $item["titulo"] . '</h1>
+					<p>' . $item["descripcion"] . '</p>
 				</li>';
+        }
+    }
 
-		}
+    #ELIMINAR ITEM DEL SLIDE
+    #-----------------------------------------------------------
 
-	}
+    public function eliminarSlideController($datos) {
 
-	#ELIMINAR ITEM DEL SLIDE
-	#-----------------------------------------------------------
-	public function eliminarSlideController($datos){
+        $respuesta = GestorSlideModel::eliminarSlideModel($datos, "slide");
 
-		$respuesta = GestorSlideModel::eliminarSlideModel($datos, "slide");
+        unlink($datos["rutaSlide"]);
 
-		unlink($datos["rutaSlide"]);
+        echo $respuesta;
+    }
 
-		echo $respuesta;
+    #ACTUALIZAR ITEM DEL SLIDE
+    #-----------------------------------------------------------
 
-	}
+    public function actualizarSlideController($datos) {
 
-	#ACTUALIZAR ITEM DEL SLIDE
-	#-----------------------------------------------------------
+        GestorSlideModel::actualizarSlideModel($datos, "slide");
+        $respuesta = GestorSlideModel::seleccionarActualizacionSlideModel($datos, "slide");
 
-	public function actualizarSlideController($datos){
+        $enviarDatos = array("titulo" => $respuesta["titulo"],
+            "descripcion" => $respuesta["descripcion"]);
 
-		GestorSlideModel::actualizarSlideModel($datos, "slide");
-		$respuesta = GestorSlideModel::seleccionarActualizacionSlideModel($datos, "slide");
+        echo json_encode($enviarDatos);
+    }
 
-		$enviarDatos = array("titulo"=>$respuesta["titulo"],
-			                 "descripcion"=>$respuesta["descripcion"]);
-		
-		echo json_encode($enviarDatos);
-	}
+    #ACTUALIZAR ORDEN 
+    #---------------------------------------------------
 
-	#ACTUALIZAR ORDEN 
-	#---------------------------------------------------
-	public function actualizarOrdenController($datos){
+    public function actualizarOrdenController($datos) {
 
-		GestorSlideModel::actualizarOrdenModel($datos, "slide");
+        GestorSlideModel::actualizarOrdenModel($datos, "slide");
 
-		$respuesta = GestorSlideModel::seleccionarOrdenModel("slide");
+        $respuesta = GestorSlideModel::seleccionarOrdenModel("slide");
 
-		foreach($respuesta as $row => $item){
+        if (!is_null($respuesta))
+            foreach ($respuesta as $row => $item) {
 
-			echo'<li id="item'.$item["id"].'">
-			     <span class="fa fa-pencil editarSlide" style="background:blue"></span>
-			     <img src="'.substr($item["ruta"], 6).'" style="float:left; margin-bottom:10px" width="80%">
-			     <h1>'.$item["titulo"].'</h1>
-			     <p>'.$item["descripcion"].'</p>
-			     </li>';
-
-		}
-
-
-
-
-	}
+                echo'<li id="item' . $item["id"] . '">
+                                 <span class="fa fa-pencil editarSlide" style="background:blue"></span>
+                                 <img src="' . substr($item["ruta"], 6) . '" style="float:left; margin-bottom:10px" width="80%">
+                                 <h1>' . $item["titulo"] . '</h1>
+                                 <p>' . $item["descripcion"] . '</p>
+                                 </li>';
+            }
+    }
 
 }

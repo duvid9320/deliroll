@@ -1,177 +1,171 @@
 /*=============================================
-Área de arrastre de imágenes
-=============================================*/
+ Área de arrastre de imágenes
+ =============================================*/
 
-if($("#columnasSlide").html() == 0){
+if ($("#columnasSlide").html() == 0) {
 
-	$("#columnasSlide").css({"height":"100px"});
+    $("#columnasSlide").css({"height": "100px"});
 
-}
+} else {
 
-else{
-
-	$("#columnasSlide").css({"height":"auto"});
+    $("#columnasSlide").css({"height": "auto"});
 
 }
 
 /*=====  Área de arrastre de imágenes  ======*/
 
 /*=============================================
-Subir Imagen
-=============================================*/
+ Subir Imagen
+ =============================================*/
 
-$("#columnasSlide").on("dragover", function(e){
+$("#columnasSlide").on("dragover", function (e) {
 
-	e.preventDefault();
-	e.stopPropagation();
+    e.preventDefault();
+    e.stopPropagation();
 
-	$("#columnasSlide").css({"background":"url(views/images/pattern.jpg)"})
+    $("#columnasSlide").css({"background": "url(views/images/pattern.jpg)"})
 
 })
 
 /*=====  Subir Imagen  ======*/
 /*=============================================
-Soltar Imagen
-=============================================*/
+ Soltar Imagen
+ =============================================*/
 
-$("#columnasSlide").on("drop", function(e){
+$("#columnasSlide").on("drop", function (e) {
 
-	e.preventDefault();
-	e.stopPropagation();
+    e.preventDefault();
+    e.stopPropagation();
 
-	$("#columnasSlide").css({"background":"white"})
+    $("#columnasSlide").css({"background": "white"})
 
-	var archivo = e.originalEvent.dataTransfer.files;
-	var imagen = archivo[0];
+    var archivo = e.originalEvent.dataTransfer.files;
+    var imagen = archivo[0];
 
-	// Validar tamaño de la imagen
-	var imagenSize = imagen.size;
-	
-	if(Number(imagenSize) > 2000000){
+    // Validar tamaño de la imagen
+    var imagenSize = imagen.size;
 
-		$("#columnasSlide").before('<div class="alert alert-warning alerta text-center">El archivo excede el peso permitido, 200kb</div>')
+    if (Number(imagenSize) > 2000000) {
 
-	}
+        $("#columnasSlide").before('<div class="alert alert-warning alerta text-center">El archivo excede el peso permitido, 200kb</div>')
 
-	else{
+    } else {
 
-		$(".alerta").remove();
+        $(".alerta").remove();
 
-	}
+    }
 
-	// Validar tipo de la imagen
-	var imagenType = imagen.type;
-	
-	if(imagenType == "image/jpeg" || imagenType == "image/png"){
+    // Validar tipo de la imagen
+    var imagenType = imagen.type;
 
-		$(".alerta").remove();
+    if (imagenType == "image/jpeg" || imagenType == "image/png") {
 
-	}
+        $(".alerta").remove();
 
-	else{
+    } else {
 
-		$("#columnasSlide").before('<div class="alert alert-warning alerta text-center">El archivo debe ser formato JPG o PNG</div>')
+        $("#columnasSlide").before('<div class="alert alert-warning alerta text-center">El archivo debe ser formato JPG o PNG</div>')
 
-	}
+    }
 
-	//Subir imagen al servidor
-	if(Number(imagenSize) < 2000000 && imagenType == "image/jpeg" || imagenType == "image/png"){
+    //Subir imagen al servidor
+    if (Number(imagenSize) < 2000000 && imagenType == "image/jpeg" || imagenType == "image/png") {
 
-		var datos = new FormData();
+        var datos = new FormData();
 
-		datos.append("imagen", imagen);
+        datos.append("imagen", imagen);
 
-		$.ajax({
-			url:"views/ajax/gestorSlide.php",
-			method: "POST",
-			data: datos,
-			cache: false,
-			contentType: false,
-			processData: false,
-			dataType:"json",
-			beforeSend: function(){
+        $.ajax({
+            url: "views/ajax/gestorSlide.php",
+            method: "POST",
+            data: datos,
+            cache: false,
+            contentType: false,
+            processData: false,
+            dataType: "json",
+            beforeSend: function () {
 
-				$("#columnasSlide").before('<img src="views/images/status.gif" id="status">');
+                $("#columnasSlide").before('<img src="views/images/status.gif" id="status">');
 
-			},
-			success: function(respuesta){
+            },
+            success: function (respuesta) {
 
-				$("#status").remove();
-				
-				if(respuesta == 0){
+                $("#status").remove();
 
-					$("#columnasSlide").before('<div class="alert alert-warning alerta text-center">La imagen es inferior a 1600px * 600px</div>')
-				
-				}
+                if (respuesta == 0) {
 
-				else{
+                    $("#columnasSlide").before('<div class="alert alert-warning alerta text-center">La imagen es inferior a 1600px * 600px</div>')
 
-					$("#columnasSlide").css({"height":"auto"});
+                } else{
+                    console.log(respuesta);
+                    console.log("\n"+respuesta["ruta"]);
 
-					$("#columnasSlide").append('<li class="bloqueSlide"><span class="fa fa-times eliminarSlide"></span><img src="'+respuesta["ruta"].slice(6)+'" class="handleImg"></li>');
+                    $("#columnasSlide").css({"height": "auto"});
 
-					$("#ordenarTextSlide").append('<li><span class="fa fa-pencil" style="background:blue"></span><img src="'+respuesta["ruta"].slice(6)+'" style="float:left; margin-bottom:10px" width="80%"><h1>'+respuesta["titulo"]+'</h1><p>'+respuesta["descripcion"]+'</p></li>');
+                    $("#columnasSlide").append('<li class="bloqueSlide"><span class="fa fa-times eliminarSlide"></span><img src="' + respuesta["ruta"].slice(6) + '" class="handleImg"></li>');
 
-					swal({
-						title: "¡OK!",
-						text: "¡La imagen se subió correctamente!",
-						type: "success",
-						confirmButtonText: "Cerrar",
-						closeOnConfirm: false
-						},
-						function(isConfirm){
-							if (isConfirm){
-								window.location = "slide";
-							}
-						});
+                    $("#ordenarTextSlide").append('<li><span class="fa fa-pencil" style="background:blue"></span><img src="' + respuesta["ruta"].slice(6) + '" style="float:left; margin-bottom:10px" width="80%"><h1>' + respuesta["titulo"] + '</h1><p>' + respuesta["descripcion"] + '</p></li>');
 
-				}
+                    swal({
+                        title: "¡OK!",
+                        text: "¡La imagen se subió correctamente!",
+                        type: "success",
+                        confirmButtonText: "Cerrar",
+                        closeOnConfirm: false
+                    },
+                            function (isConfirm) {
+                                if (isConfirm) {
+                                    window.location = "slide";
+                                }
+                            });
 
-			}
+                }
 
-		});
+            }
 
-	}
+        });
+
+    }
 
 })
 /*=====  Soltar Imagen  ======*/
 
 /*=============================================
-Eliminar Item Slide
-=============================================*/
+ Eliminar Item Slide
+ =============================================*/
 
-$(".eliminarSlide").click(function(){
+$(".eliminarSlide").click(function () {
 
-	if($(".eliminarSlide").length == 1){
+    if ($(".eliminarSlide").length == 1) {
 
-		$("#columnasSlide").css({"height":"100px"});
+        $("#columnasSlide").css({"height": "100px"});
 
-	}
+    }
 
-	idSlide = $(this).parent().attr("id");
-	rutaSlide = $(this).attr("ruta");
+    idSlide = $(this).parent().attr("id");
+    rutaSlide = $(this).attr("ruta");
 
-	$(this).parent().remove();
-	$("#item"+idSlide).remove();
+    $(this).parent().remove();
+    $("#item" + idSlide).remove();
 
-	var borrarItem = new FormData();
+    var borrarItem = new FormData();
 
-	borrarItem.append("idSlide", idSlide);
-	borrarItem.append("rutaSlide", rutaSlide);
+    borrarItem.append("idSlide", idSlide);
+    borrarItem.append("rutaSlide", rutaSlide);
 
-	$.ajax({
+    $.ajax({
 
-		url:"views/ajax/gestorSlide.php",
-		method: "POST",
-		data: borrarItem,
-		cache: false,
-		contentType: false,
-		processData: false,
-		success: function(respuesta){
+        url: "views/ajax/gestorSlide.php",
+        method: "POST",
+        data: borrarItem,
+        cache: false,
+        contentType: false,
+        processData: false,
+        success: function (respuesta) {
 
-		}
+        }
 
-	})
+    })
 
 })
 
@@ -179,145 +173,145 @@ $(".eliminarSlide").click(function(){
 /*=====  Eliminar Item Slide  ======*/
 
 /*=============================================
-Editar Item Slide
-=============================================*/
+ Editar Item Slide
+ =============================================*/
 
-$(".editarSlide").click(function(){
+$(".editarSlide").click(function () {
 
-	idSlide = $(this).parent().attr("id");
-	rutaImagen = $(this).parent().children("img").attr("src");
-	rutaTitulo = $(this).parent().children("h1").html();
-	rutaDescripcion = $(this).parent().children("p").html();
-	
-	$(this).parent().html('<img src="'+rutaImagen+'" class="img-thumbnail"><input type="text" class="form-control" id="enviarTitulo" placeholder="Título" value="'+rutaTitulo+'"><textarea row="5" id="enviarDescripcion" class="form-control" placeholder="Descripción">'+rutaDescripcion+'</textarea><button class="btn btn-info pull-right" id="guardar'+idSlide+'" style="margin:10px">Guardar</button>');
+    idSlide = $(this).parent().attr("id");
+    rutaImagen = $(this).parent().children("img").attr("src");
+    rutaTitulo = $(this).parent().children("h1").html();
+    rutaDescripcion = $(this).parent().children("p").html();
 
-	$("#guardar"+idSlide).click(function(){
+    $(this).parent().html('<img src="' + rutaImagen + '" class="img-thumbnail"><input type="text" class="form-control" id="enviarTitulo" placeholder="Título" value="' + rutaTitulo + '"><textarea row="5" id="enviarDescripcion" class="form-control" placeholder="Descripción">' + rutaDescripcion + '</textarea><button class="btn btn-info pull-right" id="guardar' + idSlide + '" style="margin:10px">Guardar</button>');
 
-		enviarId = idSlide.slice(4);
+    $("#guardar" + idSlide).click(function () {
 
-		enviarTitulo = $("#enviarTitulo").val();
-		enviarDescripcion = $("#enviarDescripcion").val();
+        enviarId = idSlide.slice(4);
 
-		var actualizarSlide = new FormData();
+        enviarTitulo = $("#enviarTitulo").val();
+        enviarDescripcion = $("#enviarDescripcion").val();
 
-		actualizarSlide.append("enviarId",enviarId);
-		actualizarSlide.append("enviarTitulo",enviarTitulo);
-		actualizarSlide.append("enviarDescripcion",enviarDescripcion);
+        var actualizarSlide = new FormData();
 
-		$.ajax({
-			url:"views/ajax/gestorSlide.php",
-			method: "POST",
-			data: actualizarSlide,
-			cache: false,
-			contentType: false,
-			processData: false,
-			dataType:"json",
-			success: function(respuesta){
-				
-				$("#guardar"+idSlide).parent().html('<span class="fa fa-pencil editarSlide" style="background:blue"></span><img src="'+rutaImagen+'" style="float:left; margin-bottom:10px" width="80%"><h1>'+respuesta["titulo"]+'</h1><p>'+respuesta["descripcion"]+'</p>');
+        actualizarSlide.append("enviarId", enviarId);
+        actualizarSlide.append("enviarTitulo", enviarTitulo);
+        actualizarSlide.append("enviarDescripcion", enviarDescripcion);
 
-				swal({
-						title: "¡OK!",
-						text: "¡Se han guardado los cambios correctamente!",
-						type: "success",
-						confirmButtonText: "Cerrar",
-						closeOnConfirm: false
-						},
-						function(isConfirm){
-							if (isConfirm){
-								window.location = "slide";
-							}
-						});
+        $.ajax({
+            url: "views/ajax/gestorSlide.php",
+            method: "POST",
+            data: actualizarSlide,
+            cache: false,
+            contentType: false,
+            processData: false,
+            dataType: "json",
+            success: function (respuesta) {
 
-			}
+                $("#guardar" + idSlide).parent().html('<span class="fa fa-pencil editarSlide" style="background:blue"></span><img src="' + rutaImagen + '" style="float:left; margin-bottom:10px" width="80%"><h1>' + respuesta["titulo"] + '</h1><p>' + respuesta["descripcion"] + '</p>');
 
-		});
+                swal({
+                    title: "¡OK!",
+                    text: "¡Se han guardado los cambios correctamente!",
+                    type: "success",
+                    confirmButtonText: "Cerrar",
+                    closeOnConfirm: false
+                },
+                        function (isConfirm) {
+                            if (isConfirm) {
+                                window.location = "slide";
+                            }
+                        });
+
+            }
+
+        });
 
 
 
-	})
+    })
 
 })
 
 /*=====  Editar  Item Slide  ======*/
 
 /*=============================================
-Ordenar Item Slide
-=============================================*/
+ Ordenar Item Slide
+ =============================================*/
 
 var almacenarOrdenId = new Array();
 var ordenItem = new Array();
 
-$("#ordenarSlide").click(function(){
+$("#ordenarSlide").click(function () {
 
-	$("#ordenarSlide").hide();
-	$("#guardarSlide").show();
+    $("#ordenarSlide").hide();
+    $("#guardarSlide").show();
 
-	$("#columnasSlide").css({"cursor":"move"})
-	$("#columnasSlide span").hide()
+    $("#columnasSlide").css({"cursor": "move"})
+    $("#columnasSlide span").hide()
 
-	$("#columnasSlide").sortable({
-		revert: true,
-		connectWith: ".bloqueSlide",
-		handle: ".handleImg",
-		stop: function(event){
+    $("#columnasSlide").sortable({
+        revert: true,
+        connectWith: ".bloqueSlide",
+        handle: ".handleImg",
+        stop: function (event) {
 
-			for(var i= 0; i < $("#columnasSlide li").length; i++){
+            for (var i = 0; i < $("#columnasSlide li").length; i++) {
 
-				almacenarOrdenId[i] = event.target.children[i].id;
-				ordenItem[i]  =  i+1;  			
+                almacenarOrdenId[i] = event.target.children[i].id;
+                ordenItem[i] = i + 1;
 
-			}
+            }
 
-		}
+        }
 
-	});
+    });
 
 });
 
-$("#guardarSlide").click(function(){
+$("#guardarSlide").click(function () {
 
-	$("#ordenarSlide").show();
-	$("#guardarSlide").hide();
+    $("#ordenarSlide").show();
+    $("#guardarSlide").hide();
 
-	for(var i= 0; i < $("#columnasSlide li").length; i++){
+    for (var i = 0; i < $("#columnasSlide li").length; i++) {
 
-		var actualizarOrden = new FormData();
-		actualizarOrden.append("actualizarOrdenSlide", almacenarOrdenId[i]);
-		actualizarOrden.append("actualizarOrdenItem", ordenItem[i]);
+        var actualizarOrden = new FormData();
+        actualizarOrden.append("actualizarOrdenSlide", almacenarOrdenId[i]);
+        actualizarOrden.append("actualizarOrdenItem", ordenItem[i]);
 
-		$.ajax({
+        $.ajax({
 
-			url:"views/ajax/gestorSlide.php",
-			method: "POST",
-			data: actualizarOrden,
-			cache: false,
-			contentType: false,
-			processData: false,
-			success: function(respuesta){
-				
-				$("#textoSlide ul").html(respuesta);
+            url: "views/ajax/gestorSlide.php",
+            method: "POST",
+            data: actualizarOrden,
+            cache: false,
+            contentType: false,
+            processData: false,
+            success: function (respuesta) {
 
-				swal({
-						title: "¡OK!",
-						text: "¡El orden se ha actualizado correctamente!",
-						type: "success",
-						confirmButtonText: "Cerrar",
-						closeOnConfirm: false
-						},
-						function(isConfirm){
-							if (isConfirm){
-								window.location = "slide";
-							}
-						});
+                $("#textoSlide ul").html(respuesta);
+
+                swal({
+                    title: "¡OK!",
+                    text: "¡El orden se ha actualizado correctamente!",
+                    type: "success",
+                    confirmButtonText: "Cerrar",
+                    closeOnConfirm: false
+                },
+                        function (isConfirm) {
+                            if (isConfirm) {
+                                window.location = "slide";
+                            }
+                        });
 
 
 
-			}
+            }
 
-		})
+        })
 
-	}
+    }
 
 })
 

@@ -1,103 +1,95 @@
 <?php
 
-class GestorGaleria{
+class GestorGaleria {
+    #MOSTRAR IMAGEN GALERIA AJAX
+    #------------------------------------------------------------
 
-	#MOSTRAR IMAGEN GALERIA AJAX
-	#------------------------------------------------------------
-	public function mostrarImagenController($datos){
+    public function mostrarImagenController($datos) {
 
-		list($ancho, $alto) = getimagesize($datos);
+        echo '<script type="text/javascript">alert('. print_r($datos, true).');</script>';
+        return;
+        list($ancho, $alto) = getimagesize($datos);
 
-		if($ancho < 1024 || $alto < 768){
+        if ($ancho < 1024 || $alto < 768) {
 
-			echo 0;
+            echo 0;
+        } else {
 
-		}
+            $aleatorio = mt_rand(100, 999);
 
-		else{
+            $ruta = "../../views/images/galeria/galeria" . $aleatorio . ".jpg";
 
-			$aleatorio = mt_rand(100, 999);
+            $nuevo_ancho = 1024;
+            $nuevo_alto = 768;
 
-			$ruta = "../../views/images/galeria/galeria".$aleatorio.".jpg";
+            $origen = imagecreatefromjpeg($datos);
 
-			$nuevo_ancho = 1024;
-			$nuevo_alto = 768;
+            #imagecreatetruecolor — Crear una nueva imagen de color verdadero
+            $destino = imagecreatetruecolor($nuevo_ancho, $nuevo_alto);
 
-			$origen = imagecreatefromjpeg($datos);
+            #imagecopyresized() - copia una porción de una imagen a otra imagen. 
+            #bool imagecopyresized( $destino, $origen, int $destino_x, int $destino_y, int $origen_x, int $origen_y, int $destino_w, int $destino_h, int $origen_w, int $origen_h)
 
-			#imagecreatetruecolor — Crear una nueva imagen de color verdadero
-			$destino = imagecreatetruecolor($nuevo_ancho, $nuevo_alto);
+            imagecopyresized($destino, $origen, 0, 0, 0, 0, $nuevo_ancho, $nuevo_alto, $ancho, $alto);
 
-			#imagecopyresized() - copia una porción de una imagen a otra imagen. 
+            imagejpeg($destino, $ruta);
 
-			#bool imagecopyresized( $destino, $origen, int $destino_x, int $destino_y, int $origen_x, int $origen_y, int $destino_w, int $destino_h, int $origen_w, int $origen_h)
+            GestorGaleriaModel::subirImagenGaleriaModel($ruta, "galeria");
 
-			imagecopyresized($destino, $origen, 0, 0, 0, 0, $nuevo_ancho, $nuevo_alto, $ancho, $alto);
+            $respuesta = GestorGaleriaModel::mostrarImagenGaleriaModel($ruta, "galeria");
 
-			imagejpeg($destino, $ruta);
+            echo $respuesta["ruta"];
+        }
+    }
 
-			GestorGaleriaModel::subirImagenGaleriaModel($ruta, "galeria");
+    #MOSTRAR IMAGENES EN LA VISTA
+    #------------------------------------------------------------
 
-			$respuesta = GestorGaleriaModel::mostrarImagenGaleriaModel($ruta, "galeria");
+    public function mostrarImagenVistaController() {
 
-			echo $respuesta["ruta"];
+        $respuesta = GestorGaleriaModel::mostrarImagenVistaModel("galeria");
 
-		}
+        foreach ($respuesta as $row => $item) {
 
-	}
-
-	#MOSTRAR IMAGENES EN LA VISTA
-	#------------------------------------------------------------
-
-	public function mostrarImagenVistaController(){
-
-		$respuesta = GestorGaleriaModel::mostrarImagenVistaModel("galeria");
-
-		foreach($respuesta as $row => $item){
-
-			echo '<li id="'.$item["id"].'" class="bloqueGaleria">
-					<span class="fa fa-times eliminarFoto" ruta="'.$item["ruta"].'"></span>
-					<a rel="grupo" href="'.substr($item["ruta"],6).'">
-					<img src="'.substr($item["ruta"],6).'" class="handleImg">
+            echo '<li id="' . $item["id"] . '" class="bloqueGaleria">
+					<span class="fa fa-times eliminarFoto" ruta="' . $item["ruta"] . '"></span>
+					<a rel="grupo" href="' . substr($item["ruta"], 6) . '">
+					<img src="' . substr($item["ruta"], 6) . '" class="handleImg">
 					</a>
 				</li>';
+        }
+    }
 
-		}
+    #ELIMINAR ITEM DE LA GALERIA
+    #-----------------------------------------------------------
 
-	}
+    public function eliminarGaleriaController($datos) {
 
-	#ELIMINAR ITEM DE LA GALERIA
-	#-----------------------------------------------------------
-	public function eliminarGaleriaController($datos){
+        $respuesta = GestorGaleriaModel::eliminarGaleriaModel($datos, "galeria");
 
-		$respuesta = GestorGaleriaModel::eliminarGaleriaModel($datos, "galeria");
+        unlink($datos["rutaGaleria"]);
 
-		unlink($datos["rutaGaleria"]);
+        echo $respuesta;
+    }
 
-		echo $respuesta;
+    #ACTUALIZAR ORDEN 
+    #---------------------------------------------------
 
-	}
+    public function actualizarOrdenController($datos) {
 
-	#ACTUALIZAR ORDEN 
-	#---------------------------------------------------
-	public function actualizarOrdenController($datos){
+        GestorGaleriaModel::actualizarOrdenModel($datos, "galeria");
 
-		GestorGaleriaModel::actualizarOrdenModel($datos, "galeria");
+        $respuesta = GestorGaleriaModel::seleccionarOrdenModel("galeria");
 
-		$respuesta = GestorGaleriaModel::seleccionarOrdenModel("galeria");
+        foreach ($respuesta as $row => $item) {
 
-		foreach($respuesta as $row => $item){
-
-			echo '<li id="'.$item["id"].'" class="bloqueGaleria">
-					<span class="fa fa-times eliminarFoto" ruta="'.$item["ruta"].'"></span>
-					<a rel="grupo" href="'.substr($item["ruta"],6).'">
-					<img src="'.substr($item["ruta"],6).'" class="handleImg">
+            echo '<li id="' . $item["id"] . '" class="bloqueGaleria">
+					<span class="fa fa-times eliminarFoto" ruta="' . $item["ruta"] . '"></span>
+					<a rel="grupo" href="' . substr($item["ruta"], 6) . '">
+					<img src="' . substr($item["ruta"], 6) . '" class="handleImg">
 					</a>
 				</li>';
-
-		}
-
-
-	}
+        }
+    }
 
 }

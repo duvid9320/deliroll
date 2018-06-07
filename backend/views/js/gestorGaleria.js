@@ -1,263 +1,256 @@
 /*=============================================
-Área de arrastre de imágenes
-=============================================*/
+ Área de arrastre de imágenes
+ =============================================*/
 
-if($("#lightbox").html() == 0){
+if ($("#lightbox").html() == 0) {
 
-	$("#lightbox").css({"height":"100px"});
+    $("#lightbox").css({"height": "100px"});
 
-}
+} else {
 
-else{
-
-	$("#lightbox").css({"height":"auto"});
+    $("#lightbox").css({"height": "auto"});
 
 }
 
 
 /*=============================================
-Subir múltiples Imagenes
-=============================================*/
-$("body").on("dragover", function(e){
+ Subir múltiples Imagenes
+ =============================================*/
+$("body").on("dragover", function (e) {
 
-	e.preventDefault();
-	e.stopPropagation();
+    e.preventDefault();
+    e.stopPropagation();
 
 })
 
 
-$("#lightbox").on("dragover", function(e){
+$("#lightbox").on("dragover", function (e) {
 
-	e.preventDefault();
-	e.stopPropagation();
+    e.preventDefault();
+    e.stopPropagation();
 
-	$("#lightbox").css({"background":"url(views/images/pattern.jpg)"})
+    $("#lightbox").css({"background": "url(views/images/pattern.jpg)"})
 
 });
 
 /*=============================================
-Soltar las Imágenes
-=============================================*/
+ Soltar las Imágenes
+ =============================================*/
 
-$("body").on("drop", function(e){
+$("body").on("drop", function (e) {
 
-	e.preventDefault();
-	e.stopPropagation();
+    e.preventDefault();
+    e.stopPropagation();
 
 });
 
 var imagenSize = [];
 var imagenType = [];
 
-$("#lightbox").on("drop", function(e){
+$("#lightbox").on("drop", function (e) {
 
-	e.preventDefault();
-	e.stopPropagation();
+    e.preventDefault();
+    e.stopPropagation();
 
-	$("#lightbox").css({"background":"white"})
+    $("#lightbox").css({"background": "white"})
 
-	archivo = e.originalEvent.dataTransfer.files;
-	
-	for(var i = 0; i < archivo.length; i++){
+    archivo = e.originalEvent.dataTransfer.files;
 
-		imagen = archivo[i];
-		imagenSize.push(imagen.size);
-		imagenType.push(imagen.type);
+    for (var i = 0; i < archivo.length; i++) {
 
-		if(Number(imagenSize[i]) > 2000000){
+        imagen = archivo[i];
+        imagenSize.push(imagen.size);
+        imagenType.push(imagen.type);
 
-			$("#lightbox").before('<div class="alert alert-warning alerta text-center">El archivo excede el peso permitido, 2mb</div>')
+        if (Number(imagenSize[i]) > 2000000) {
 
-		}
+            $("#lightbox").before('<div class="alert alert-warning alerta text-center">El archivo excede el peso permitido, 2mb</div>')
 
-		else{
+        } else {
 
-			$(".alerta").remove();
-		
-		}
+            $(".alerta").remove();
 
-		if(imagenType[i] == "image/jpeg" || imagenType[i] == "image/png"){
+        }
 
-			$(".alerta").remove();		
+        if (imagenType[i] == "image/jpeg" || imagenType[i] == "image/png") {
 
-		}
-		else{
+            $(".alerta").remove();
 
-			$("#lightbox").before('<div class="alert alert-warning alerta text-center">El archivo debe ser formato JPG o PNG</div>')
+        } else {
 
-		}
+            $("#lightbox").before('<div class="alert alert-warning alerta text-center">El archivo debe ser formato JPG o PNG</div>')
 
-		if(Number(imagenSize[i]) < 2000000 && imagenType[i] == "image/jpeg" || imagenType[i] == "image/png"){
+        }
 
-			var datos = new FormData();
+        if (Number(imagenSize[i]) < 2000000 && imagenType[i] == "image/jpeg" || imagenType[i] == "image/png") {
 
-			datos.append("imagen", imagen);
+            var datos = new FormData();
 
-			$.ajax({
-				url:"views/ajax/gestorGaleria.php",
-				method: "POST",
-				data: datos,
-				cache: false,
-				contentType: false,
-				processData: false,
-				beforeSend: function(){
+            datos.append("imagen", imagen);
 
-					$("#lightbox").append('<li  id="status"><img src="views/images/status.gif"></li>');	
-				},
-				success: function(respuesta){
+            $.ajax({
+                url: "views/ajax/gestorGaleria.php",
+                method: "POST",
+                data: datos,
+                cache: false,
+                contentType: false,
+                processData: false,
+                beforeSend: function () {
 
-					$("#status").remove();
+                    $("#lightbox").append('<li  id="status"><img src="views/images/status.gif"></li>');
+                },
+                success: function (respuesta) {
 
-					if(respuesta == 0){
+                    $("#status").remove();
 
-						$("#lightbox").before('<div class="alert alert-warning alerta text-center">La imagen es inferior a 1024px * 768px</div>')
+                    if (respuesta == 0) {
 
-					}
-					else{
+                        $("#lightbox").before('<div class="alert alert-warning alerta text-center">La imagen es inferior a 1024px * 768px</div>')
 
-						$("#lightbox").css({"height":"auto"});
+                    } else {
 
-						$("#lightbox").append('<li><span class="fa fa-times"></span><a rel="grupo" href="'+respuesta.slice(6)+'"><img src="'+respuesta.slice(6)+'"></a></li>');
+                        $("#lightbox").css({"height": "auto"});
 
-						swal({
-						title: "¡OK!",
-						text: "¡La imagen se subió correctamente!",
-						type: "success",
-						confirmButtonText: "Cerrar",
-						closeOnConfirm: false
-						},
+                        $("#lightbox").append('<li><span class="fa fa-times"></span><a rel="grupo" href="' + respuesta.slice(6) + '"><img src="' + respuesta.slice(6) + '"></a></li>');
 
-						function(isConfirm){
-							if (isConfirm){
-								window.location = "galeria";
-							}
-						});
+//                        swal({
+//                            title: "¡OK!",
+//                            text: "¡La imagen se subió correctamente!",
+//                            type: "success",
+//                            confirmButtonText: "Cerrar",
+//                            closeOnConfirm: false
+//                        },
+//                                function (isConfirm) {
+//                                    if (isConfirm) {
+//                                        window.location = "galeria";
+//                                    }
+//                                });
 
-					}
+                    }
 
-				}
+                }
 
-			})
+            })
 
-		}
-	
-	}
+        }
+
+    }
 
 })
 
 /*=============================================
-Eliminar Item Galería
-=============================================*/
+ Eliminar Item Galería
+ =============================================*/
 
-$(".eliminarFoto").click(function(){
+$(".eliminarFoto").click(function () {
 
-	if($(".eliminarFoto").length == 1){
-		
-		$("#lightbox").css({"height":"100px"});
-	
-	}
+    if ($(".eliminarFoto").length == 1) {
 
-	idGaleria = $(this).parent().attr("id");
-	rutaGaleria = $(this).attr("ruta");
+        $("#lightbox").css({"height": "100px"});
 
-	$(this).parent().remove();
+    }
 
-	var borrarItem = new FormData();
-	borrarItem.append("idGaleria", idGaleria);
-	borrarItem.append("rutaGaleria", rutaGaleria);
+    idGaleria = $(this).parent().attr("id");
+    rutaGaleria = $(this).attr("ruta");
 
-	$.ajax({
+    $(this).parent().remove();
 
-		url:"views/ajax/gestorGaleria.php",
-		method: "POST",
-		data: borrarItem,
-		cache: false,
-		contentType: false,
-		processData: false,
-		success: function(respuesta){
-			console.log('respuesta', respuesta);	
-		}
+    var borrarItem = new FormData();
+    borrarItem.append("idGaleria", idGaleria);
+    borrarItem.append("rutaGaleria", rutaGaleria);
 
-	})
+    $.ajax({
+
+        url: "views/ajax/gestorGaleria.php",
+        method: "POST",
+        data: borrarItem,
+        cache: false,
+        contentType: false,
+        processData: false,
+        success: function (respuesta) {
+            console.log('respuesta', respuesta);
+        }
+
+    })
 
 });
 
 /*=============================================
-Ordenar Item Galería
-=============================================*/
+ Ordenar Item Galería
+ =============================================*/
 
 
 var almacenarOrdenId = [];
 var ordenItem = [];
 
-$("#ordenarGaleria").click(function(){
+$("#ordenarGaleria").click(function () {
 
-	$("#ordenarGaleria").hide();
-	$("#guardarGaleria").show();
+    $("#ordenarGaleria").hide();
+    $("#guardarGaleria").show();
 
-	$("#lightbox").css({"cursor":"move"})
-	$("#lightbox span").hide()
+    $("#lightbox").css({"cursor": "move"})
+    $("#lightbox span").hide()
 
-	$("#lightbox").sortable({
-		revert: true,
-		connectWith: ".bloqueGaleria",
-		handle: ".handleImg",
-		stop: function(event){
+    $("#lightbox").sortable({
+        revert: true,
+        connectWith: ".bloqueGaleria",
+        handle: ".handleImg",
+        stop: function (event) {
 
-			for(var i= 0; i < $("#lightbox li").length; i++){
+            for (var i = 0; i < $("#lightbox li").length; i++) {
 
-				almacenarOrdenId[i] = event.target.children[i].id;
-				ordenItem[i]  =  i+1;  		
+                almacenarOrdenId[i] = event.target.children[i].id;
+                ordenItem[i] = i + 1;
 
-			}
+            }
 
-		}
+        }
 
-	})
+    })
 
 })
 
-$("#guardarGaleria").click(function(){
+$("#guardarGaleria").click(function () {
 
-	$("#ordenarGaleria").show();
-	$("#guardarGaleria").hide();
+    $("#ordenarGaleria").show();
+    $("#guardarGaleria").hide();
 
-	for(var i= 0; i < $("#lightbox li").length; i++){
+    for (var i = 0; i < $("#lightbox li").length; i++) {
 
-		var actualizarOrden = new FormData();
-		actualizarOrden.append("actualizarOrdenGaleria", almacenarOrdenId[i]);
-		actualizarOrden.append("actualizarOrdenItem", ordenItem[i]);
+        var actualizarOrden = new FormData();
+        actualizarOrden.append("actualizarOrdenGaleria", almacenarOrdenId[i]);
+        actualizarOrden.append("actualizarOrdenItem", ordenItem[i]);
 
-		$.ajax({
+        $.ajax({
 
-			url:"views/ajax/gestorGaleria.php",
-			method: "POST",
-			data: actualizarOrden,
-			cache: false,
-			contentType: false,
-			processData: false,
-			success: function(respuesta){
+            url: "views/ajax/gestorGaleria.php",
+            method: "POST",
+            data: actualizarOrden,
+            cache: false,
+            contentType: false,
+            processData: false,
+            success: function (respuesta) {
 
-				$("#lightbox").html(respuesta);
+                $("#lightbox").html(respuesta);
 
-				swal({
-						title: "¡OK!",
-						text: "¡El orden se ha actualizado correctamente!",
-						type: "success",
-						confirmButtonText: "Cerrar",
-						closeOnConfirm: false
-						},
-						function(isConfirm){
-							if (isConfirm){
-								window.location = "galeria";
-							}
-						});
+                swal({
+                    title: "¡OK!",
+                    text: "¡El orden se ha actualizado correctamente!",
+                    type: "success",
+                    confirmButtonText: "Cerrar",
+                    closeOnConfirm: false
+                },
+                        function (isConfirm) {
+                            if (isConfirm) {
+                                window.location = "galeria";
+                            }
+                        });
 
-			}
+            }
 
 
-		})
+        })
 
-	}
+    }
 
 })

@@ -7,7 +7,9 @@
 			<?php
 
 				$slide = new Slide();
-				$slide -> seleccionarSlideController();
+                                
+                                if($slide->slideExists())
+                                    $slide -> seleccionarSlideController();
 			?>
 
 			</ul>
