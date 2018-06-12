@@ -12,13 +12,21 @@ test change master fetched
 /**Banner Style**/
 
 /** END Banner style**/
-
 /*Nav style*/
+.navbar{
+  z-index: 1;
+}
 li.nav-item > a:hover{
-    background: #222;
-    color: white;
-    color: #fff;
-    padding: 0.3em 0.5em;
+  padding: 0.3em 20vw;
+}
+li.m > a:hover{
+  background: #ff9900;
+}
+li.p > a:hover{
+  background: #ff3366;
+}
+li.c > a:hover{
+  background: #66cc00;
 }
 .nav-item{
   font-size: 1.2em;
@@ -29,91 +37,35 @@ li.nav-item > a:hover{
   margin-right: 3px;
   margin-left: 3px;
 }
+.deliroll{
+  width: 90px;
+  height: 30px;
+  margin-right: 3px;
+  margin-left: 3px;
+}
 .navbar-brand{
   font-size: 1.5em;
 }
-.navbar{
-  z-index: 1;
-}
 /*End nav style*/
-
-
 /** Menú Style**/
-.sidenav {
-    height: 100%;
-    width: 160px;
-    position: fixed;
-    z-index: 0;
-    top: 0;
-    left: 0;
-    overflow-x: hidden;
-    padding-top: 50px;
+.sidenav a:hover {
+    color: #fff;
 }
 .sidenav a {
-    padding: 6px 8px 6px 16px;
-    text-decoration: none;
-    font-size: 15px;
-    color: #818181;
-    display: block;
+  text-decoration: none;
+  font-size: 15px;
+  color: rgba(255, 255, 255, 0.5);
 }
-.sidenav a:hover {
-    color: #f1f1f1;
-}
-.menu {
-    padding-left: 160px; /* Same as the width of the sidenav */
-}
-
-.category {
-    position: relative;
-    padding: 2px;
-}
-.category > img {
- width: 100%;
- height: auto;
- filter: brightness(0.5);
-}
-.category .btn {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    -ms-transform: translate(-50%, -50%);
-    background-color: transparent;
-    color: white;
-    font-size: 150%;
-}
-.category .btn:hover {
-    font-weight: bolder;
-}
-.product:nth-child(odd) {
-    background: seagreen;
-}
-.product:nth-child(even) {
-    background: olive;
-}
-.product-title{
-    text-align: left;
-    font-variant: small-caps;
-    font-family: "SpaceMono-Regular";
-}
-.product-price{
-    font-weight: bold;
-    text-align: right;
-}
-.description{
-    text-align: center;
-    font-size: 12pt;
-    font-family: "SpaceMono-Italic";
+.menu{
+  padding-right: 0;
+  padding-left: 0;
 }
 .img-product{
-    max-width: 100%;
-    height: auto;
     position: relative;
-    padding-top: 2px;
-    padding-bottom: 2px;
-    padding-left: 0px;
-    padding-right: 0px;
+    padding: 5% 0;
     margin:0 auto;
+    width: 90%;
+    height: 90%;
 }
 .img-col{
   display: flex;
@@ -128,11 +80,12 @@ li.nav-item > a:hover{
     -ms-transform: translate(-50%, -50%);
     font-size: 0%;
 }
-.img-product .btn-container:hover{
-    font-size: 500%;
+.anchor {
+    display: block;
+    position: relative;
+    visibility: hidden;
 }
 /**End Menú style*/
-
 /** promos Style**/
 .img-promo{
   padding: 1em;
@@ -226,13 +179,14 @@ article{
   font-weight: bold;
 }
 footer {
-    padding-top: 5%;
+    padding-top: 10%;
     padding-bottom: 5%;
     background:#000;
     color: #fff;
     position: absolute;
     height: 100%;
 }
+
 /*
 body{
   background-color: transparent;
@@ -242,6 +196,8 @@ body{
 */
 body{
   background-color: #fff !important;
+  overflow-x: hidden;
+  font-family: 'ZillaSlab-Regular';
 }
 
 .disp-grid{
@@ -253,40 +209,36 @@ body{
 }
 /*rosa*/
 .bg-2{
-  background: #f72760;
+  background: #ff3366;
 }
 /*verde*/
 .bg-3{
-  background: #79cc13;
+  background: #66cc00;
 }
 /*naranja*/
 .bg-4{
-  background: #faa700;
+  background: #ff9900;
 }
 .bg-b {
   background-color: #000 !important;
 }
+/*blanco semi transparente*/
 .bg-opac{
   background: #fff9;
 }
-
 .prl-0{
   padding-left: 0px;
   padding-right: 0px;
 }
-
 .mh-1-3{
     min-height: 33vh;
 }
-
 .mh-1-4{
     min-height: 25vh;
 }
-
 .mh-1-5{
     min-height: 25vh;
 }
-
 .mh-100{
     min-height: 100vh;
 }
@@ -307,14 +259,8 @@ body{
     padding: inherit;
     vertical-align: inherit;
 }
-
 /***End generic style**/
 /**Fonts declarations*/
-.mono-italic-16{
-    font-family: 'SpaceMono-Italic';
-    font-size: 16pt;
-}
-
 @font-face {
     font-family: 'SpaceMono-Italic'; /*a name to be used later*/
     src: url('../fonts/SpaceMono-Italic.ttf'); /*URL to font*/
@@ -331,25 +277,53 @@ body{
     font-family: 'SpaceMono-Regular'; /*a name to be used later*/
     src: url('../fonts/SpaceMono-Regular.ttf'); /*URL to font*/
 }
+
+@font-face {
+    font-family: 'ZillaSlab-Italic'; /*a name to be used later*/
+    src: url('../fonts/ZillaSlab-Italic.ttf'); /*URL to font*/
+}
+@font-face {
+    font-family: 'ZillaSlab-Bold'; /*a name to be used later*/
+    src: url('../fonts/ZillaSlab-Bold.ttf'); /*URL to font*/
+}
+@font-face {
+    font-family: 'ZillaSlab-BoldItalic'; /*a name to be used later*/
+    src: url('../fonts/ZillaSlab-BoldItalic.ttf'); /*URL to font*/
+}
+@font-face {
+    font-family: 'ZillaSlab-Regular'; /*a name to be used later*/
+    src: url('../fonts/ZillaSlab-Regular.ttf'); /*URL to font*/
+}
 /**End fonts declare*/
 
 /**@media screen*/
 
 /*XL*/
 @media screen and (min-width: 1200px) {
-  .sidenav{
-    width: 200px;
-  }
   .menu{
     padding-left: 200px;
   }
+  #sidenav {
+    height: 100%;
+    width: 200px;
+    position: fixed;
+    z-index: 0;
+    top: 0;
+    left: 0;
+    overflow-x: hidden;
+    padding-top: 80px;
+  }
+  #sidenav a {
+    padding: 6px 8px 6px 16px;
+    display: block;
+  }/*
   .img-product{
     padding: 2%;
     width: 170px;
     height: 150px;
-  }
+  }*/
   .img-rs{
-    width: 75%;
+    width: 60%;
     margin:0 auto;
   }
   .fb-head{
@@ -362,8 +336,11 @@ body{
   .img-promo{
     height: 587px;
   }
-  .Logo{
-    display:none;
+  .p2{
+    display: none;
+  }
+  .p3{
+    display: none;
   }
   .fb-pg1{
     display:none;
@@ -374,14 +351,32 @@ body{
   .hour-info{
     padding: 1em 3em;
   }
+  .anchor {
+      top: 0px;
+  }
 }
 /*LG*/
 @media screen and (max-width: 1199px) and (min-width: 992px) {
+
+  #sidenav {
+    height: 100%;
+    width: 180px;
+    position: fixed;
+    z-index: 0;
+    top: 0;
+    left: 0;
+    overflow-x: hidden;
+    padding-top: 80px;
+  }
+  #sidenav a {
+    padding: 6px 8px 6px 16px;
+    display: block;
+  }/*
   .img-product{
     padding: 2%;
     width: 100%;
     height: 150px;
-  }
+  }*/
   .fb-head{
     margin-top: 1rem;
     margin-right: 1rem;
@@ -389,24 +384,24 @@ body{
     margin-left: 0;
     padding: 0.2em;
   }
+  .p2{
+    display: none;
+  }
+  .p3{
+    display: none;
+  }
   .img-promo{
     height: 587px;
   }
   .img-rs{
-    width: 80%;
+    width: 65%;
     margin:0 auto;
   }
   .fb-pg1{
     display:none;
   }
-  .sidenav{
-    width: 180px;
-  }
   .menu{
     padding-left: 180px;
-  }
-  .Logo{
-    display:none;
   }
   .fb-pg2{
     margin-left: -1rem;
@@ -414,13 +409,17 @@ body{
   .hour-info{
     padding: 1em 2em;
   }
+  .anchor {
+    top: 0px;
+  }
 }
 /*MD*/
 @media screen and (max-width: 991px) and (min-width: 768px){
+  /*
   .img-product{
     width: 190px;
     height: 170px;
-  }
+  }*/
   .fb-head{
     margin-top: 1rem;
     margin-right: 1rem;
@@ -428,21 +427,35 @@ body{
     margin-left: 0;
     padding: 0.2em;
   }
+  .p1{
+    display: none;
+  }
+  .p3{
+    display: none;
+  }
   .img-promo{
     height: 100%;
-  }
-  .Logo{
-    display:none;
   }
   .fb-pg1{
     display:none;
   }
   .img-rs{
-    width: 80%;
+    width: 75%;
     margin:0 auto;
   }
-  .sidenav{
+  #sidenav {
+    height: 100%;
     width: 160px;
+    position: fixed;
+    z-index: 0;
+    top: 0;
+    left: 0;
+    overflow-x: hidden;
+    padding-top: 80px;
+  }
+  #sidenav a {
+    padding: 6px 8px 6px 16px;
+    display: block;
   }
   .menu{
     padding-left: 160px;
@@ -452,27 +465,51 @@ body{
   }
   .hour-info{
     padding: 1em;
+    margin-right: 1em;
+  }
+  .anchor {
+    top: 0px;
   }
 }
 /*SM*/
 @media screen and (max-width: 767px) and (min-width: 576px){
-  .sidenav{
-    display: none;
+  #sidenav {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    -ms-overflow-style: -ms-autohiding-scrollbar;
+    white-space: nowrap;
+    z-index: 1;
+    width: 100vw;
   }
-  .menu{
-    padding-left: 0px;
+  #sidenav a{
+    display: inline-block;
+    text-align: center;
+    padding:  10px 5px;
+    margin-bottom: 15px
+  }
+  .sticky {
+    position: sticky;
+    top: 0;
+  }
+  .sticky + .menu{
+    padding-top: 35px;
   }
   .img-rs{
     width: 100%;
   }
   .img-product{
-    padding: 2%;
     width: 190px;
     height: 170px;
   }
   .fb-head{
     margin: 0.4rem 1rem;
     padding: 0.2em;
+  }
+  .p2{
+    display: none;
+  }
+  .p3{
+    display: none;
   }
   .img-promo{
     height: 470px;
@@ -491,7 +528,11 @@ body{
   .acercade{
     font-size: smaller;
   }
+  .anchor {
+    top: -55px;
+  }
 }
+
 /*XS*/
 @media screen and (max-width: 575px) {
   .hour-info{
@@ -501,16 +542,36 @@ body{
     width: 100%;
     height: 120%;
   }
-  .sidenav{
-    display: none;
+  #sidenav {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    -ms-overflow-style: -ms-autohiding-scrollbar;
+    white-space: nowrap;
+    z-index: 1;
+    width: 100vw;
   }
-  .menu{
-    padding-left: 0px;
+  #sidenav a {
+    display: inline-block;
+    text-align: center;
+    padding:  10px 5px;
+    margin-bottom: 15px
+  }
+  .sticky {
+    position: sticky;
+    top: 0;
+  }
+  .sticky + .menu{
+    padding-top: 35px;
   }
   .img-product{
-    padding: 2%;
-    width: 190px;
-    height: 170px;
+    width: 45vw;
+    height: auto;
+  }
+  .p1{
+    display: none;
+  }
+  .p2{
+    display: none;
   }
   .img-promo{
     height: 470px;
@@ -531,6 +592,9 @@ body{
   }
   .acercade{
     font-size: smaller;
+  }
+  .anchor {
+    top: -55px;
   }
 }
 /*Chrome y Opera*/

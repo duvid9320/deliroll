@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-md navbar-dark bg-b text-white ">
+<nav class="navbar navbar-expand-md navbar-dark bg-b text-white" id="navbar">
     <a class="navbar-brand Logo" href="index.php">
       <i class="fas">
         <img src="images/logo_ico.png" class="logo_ico">DELI∙ROLL
@@ -8,17 +8,14 @@
         <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navBarDeliRoll">
-        <ul class="navbar-nav navbar-nav ml-auto mr-auto align-items-center">
-            <li class="nav-item">
-                <a class="nav-link" href="index.php">HOME</a>
-            </li>
-            <li class="nav-item">
+        <ul class="navbar-nav align-items-center">
+            <li class="nav-item m">
                 <a class="nav-link" href="menu.php">MENÚ</a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item p">
                 <a class="nav-link" href="promociones.php">PROMOCIONES</a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item c">
                 <a class="nav-link" href="contacto.php">CONTACTO</a>
             </li>
             <li class="nav-item">
