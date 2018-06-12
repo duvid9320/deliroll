@@ -29,14 +29,23 @@ class GaleriaController {
             <div class="col-md-12 col-xl-12 col-xs-12  text-center prl-0">
                 <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
                     <div class="carousel-inner">
-                        <?php 
-                                foreach ($imagenes as $imagen) {
-                        ?>
-                        <div class="carousel-item active">
-                            <img class="d-block img-rs" src="<?php echo $this->castGaleria($imagen)->getRuta()?>" alt="slide<?php echo $this->castGaleria($imagen)->getOrden()?>">
-                        </div>
                         <?php
-                                }
+                        $i = 0;
+                        foreach ($imagenes as $imagen) {
+                            if ($i++ == 0) {
+                                ?>
+                                <div class="carousel-item active">
+                                    <img class="d-block img-rs" src="<?php echo "backend" . substr($this->castGaleria($imagen)->getRuta(), 5) ?>" alt="slide<?php echo $this->castGaleria($imagen)->getOrden() ?>">
+                                </div>
+                                <?php
+                            } else {
+                                ?>
+                                <div class="carousel-item">
+                                    <img class="d-block img-rs" src="<?php echo "backend" . substr($this->castGaleria($imagen)->getRuta(), 5) ?>" alt="slide<?php echo $this->castGaleria($imagen)->getOrden() ?>">
+                                </div>
+                                <?php
+                            }
+                        }
                         ?>
                     </div>
                     <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
@@ -53,7 +62,8 @@ class GaleriaController {
         <?php
     }
 
-    private function castGaleria($obj) : Galeria{
+    private function castGaleria($obj): Galeria {
         return $obj;
     }
+
 }
