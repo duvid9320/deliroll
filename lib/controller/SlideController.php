@@ -24,7 +24,7 @@ class SlideController {
                 foreach ($imagenesSlide as $imagen) {
                     ?>
                     <div class="carousel-item active">
-                        <img class="d-block img-rs " src="<?php echo $this->castSlide($imagen)->getRuta() ?>">
+                        <img class="d-block img-rs " src="<?php echo "backend".substr ($this->castSlide($imagen)->getRuta(), 5) ?>">
                     </div>
 
                     <?php

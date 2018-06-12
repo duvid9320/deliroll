@@ -13,9 +13,9 @@
  */
 class Connection {
 
-    private static $dns = 'mysql:dbname=deliroll;host=127.0.0.1'; //65.19.141.67
-    private static $user = 'root';
-    private static $password = 'root';
+    private static $dns = 'mysql:dbname=itz_deliroll;host=65.19.141.67'; //65.19.141.67
+    private static $user = 'itz_admin';
+    private static $password = 'admindeliroll';
     private static $connection;
     private $pdo;
     private $transaction;
