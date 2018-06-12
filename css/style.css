@@ -1,0 +1,603 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/*
+    Created on : 18/03/2018, 01:25:00 AM
+    Author     : A. David Rodríguez C. <duvid9320@gmai.com>
+test change master fetched
+*/
+
+/**Banner Style**/
+
+/** END Banner style**/
+/*Nav style*/
+.navbar{
+  z-index: 1;
+}
+li.nav-item > a:hover{
+  padding: 0.3em 20vw;
+}
+li.m > a:hover{
+  background: #ff9900;
+}
+li.p > a:hover{
+  background: #ff3366;
+}
+li.c > a:hover{
+  background: #66cc00;
+}
+.nav-item{
+  font-size: 1.2em;
+}
+.logo_ico{
+  width: 50px;
+  height: 50px;
+  margin-right: 3px;
+  margin-left: 3px;
+}
+.deliroll{
+  width: 90px;
+  height: 30px;
+  margin-right: 3px;
+  margin-left: 3px;
+}
+.navbar-brand{
+  font-size: 1.5em;
+}
+/*End nav style*/
+/** Menú Style**/
+.sidenav a:hover {
+    color: #fff;
+}
+.sidenav a {
+  text-decoration: none;
+  font-size: 15px;
+  color: rgba(255, 255, 255, 0.5);
+}
+.menu{
+  padding-right: 0;
+  padding-left: 0;
+}
+.img-product{
+    position: relative;
+    padding: 5% 0;
+    margin:0 auto;
+    width: 90%;
+    height: 90%;
+}
+.img-col{
+  display: flex;
+}
+.img-product .btn-container {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    font-size: 0%;
+}
+.anchor {
+    display: block;
+    position: relative;
+    visibility: hidden;
+}
+/**End Menú style*/
+/** promos Style**/
+.img-promo{
+  padding: 1em;
+}
+.fb-pg2{
+  padding: 1rem;
+  padding-top: 0;
+}
+.promo-container{
+  color: white;
+}
+.promo-container: nth-child(odd){
+  background: royalblue;
+}
+.promo-container: nth-child(even){
+  background: navy;
+}
+.promo-title{
+  color: black;
+  font-variant: all-small-caps;
+  font-family: "SpaceMono-Bold";
+}
+.btn-add-cart{
+  color:white;
+}
+.btn-container{
+  display: inline-block;
+  vertical-align: middle;
+}
+.btn-container a.btn-add-cart{
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+}
+.img-circle{
+  border-radius: 50%;
+  padding: 2vw;
+}
+/**End promos Style**/
+/** contacto Style**/
+.acercade{
+  padding: 7vh 3vw;
+  margin: 1em;
+}
+.hour-info{
+  color: #000;
+  display: table;
+  margin: 1em auto;
+  background: #fff9;
+}
+.hour-info__hours {
+ display:inline-block;
+ margin:0;
+ text-align:left
+}
+.hour-info__hours-head {
+ clear:left;
+ float:left;
+ font-weight:800;
+ margin-right:12px;
+ white-space:nowrap;
+ width:34px
+}
+.hour-info__hours-value {
+ float:left;
+ margin-left:0
+}
+.hour-info__hours-unit {
+ white-space:nowrap
+}
+.tag{
+  margin: 0px;
+  padding-bottom: 0.4em;
+  padding-top: 0.4em;
+}
+.tag h3{
+  background: #fff9;
+  margin: 0.2rem auto;
+}
+.tag h5{
+  background: #fff9;
+  margin: 0.5rem;
+}
+/**End contacto Style**/
+/**Generic style **/
+article{
+  color: #000;
+  text-align: center;
+  font-weight: bold;
+}
+footer {
+    padding-top: 10%;
+    padding-bottom: 5%;
+    background:#000;
+    color: #fff;
+    position: absolute;
+    height: 100%;
+}
+
+/*
+body{
+  background-color: transparent;
+  background-size: auto;
+  background-image: url("../images/textura.jpeg");
+}
+*/
+body{
+  background-color: #fff !important;
+  overflow-x: hidden;
+  font-family: 'ZillaSlab-Regular';
+}
+
+.disp-grid{
+  display: inline-grid;
+}
+/*gris*/
+.bg-1{
+  background: #161d1b;
+}
+/*rosa*/
+.bg-2{
+  background: #ff3366;
+}
+/*verde*/
+.bg-3{
+  background: #66cc00;
+}
+/*naranja*/
+.bg-4{
+  background: #ff9900;
+}
+.bg-b {
+  background-color: #000 !important;
+}
+/*blanco semi transparente*/
+.bg-opac{
+  background: #fff9;
+}
+.prl-0{
+  padding-left: 0px;
+  padding-right: 0px;
+}
+.mh-1-3{
+    min-height: 33vh;
+}
+.mh-1-4{
+    min-height: 25vh;
+}
+.mh-1-5{
+    min-height: 25vh;
+}
+.mh-100{
+    min-height: 100vh;
+}
+.link-unstyled {
+    font-style: inherit;
+    color: inherit;
+    background-color: transparent;
+    font-size: inherit;
+    text-decoration: none;
+    font-variant: inherit;
+    font-weight: inherit;
+    line-height: inherit;
+    font-family: inherit;
+    border-radius: inherit;
+    border: inherit;
+    outline: inherit;
+    box-shadow: inherit;
+    padding: inherit;
+    vertical-align: inherit;
+}
+/***End generic style**/
+/**Fonts declarations*/
+@font-face {
+    font-family: 'SpaceMono-Italic'; /*a name to be used later*/
+    src: url('../fonts/SpaceMono-Italic.ttf'); /*URL to font*/
+}
+@font-face {
+    font-family: 'SpaceMono-Bold'; /*a name to be used later*/
+    src: url('../fonts/SpaceMono-Bold.ttf'); /*URL to font*/
+}
+@font-face {
+    font-family: 'SpaceMono-BoldItalic'; /*a name to be used later*/
+    src: url('../fonts/SpaceMono-BoldItalic.ttf'); /*URL to font*/
+}
+@font-face {
+    font-family: 'SpaceMono-Regular'; /*a name to be used later*/
+    src: url('../fonts/SpaceMono-Regular.ttf'); /*URL to font*/
+}
+
+@font-face {
+    font-family: 'ZillaSlab-Italic'; /*a name to be used later*/
+    src: url('../fonts/ZillaSlab-Italic.ttf'); /*URL to font*/
+}
+@font-face {
+    font-family: 'ZillaSlab-Bold'; /*a name to be used later*/
+    src: url('../fonts/ZillaSlab-Bold.ttf'); /*URL to font*/
+}
+@font-face {
+    font-family: 'ZillaSlab-BoldItalic'; /*a name to be used later*/
+    src: url('../fonts/ZillaSlab-BoldItalic.ttf'); /*URL to font*/
+}
+@font-face {
+    font-family: 'ZillaSlab-Regular'; /*a name to be used later*/
+    src: url('../fonts/ZillaSlab-Regular.ttf'); /*URL to font*/
+}
+/**End fonts declare*/
+
+/**@media screen*/
+
+/*XL*/
+@media screen and (min-width: 1200px) {
+  .menu{
+    padding-left: 200px;
+  }
+  #sidenav {
+    height: 100%;
+    width: 200px;
+    position: fixed;
+    z-index: 0;
+    top: 0;
+    left: 0;
+    overflow-x: hidden;
+    padding-top: 80px;
+  }
+  #sidenav a {
+    padding: 6px 8px 6px 16px;
+    display: block;
+  }/*
+  .img-product{
+    padding: 2%;
+    width: 170px;
+    height: 150px;
+  }*/
+  .img-rs{
+    width: 60%;
+    margin:0 auto;
+  }
+  .fb-head{
+    margin-top: 1rem;
+    margin-right: 1rem;
+    margin-bottom: 0;
+    margin-left: 0;
+    padding: 0.2em;
+  }
+  .img-promo{
+    height: 587px;
+  }
+  .p2{
+    display: none;
+  }
+  .p3{
+    display: none;
+  }
+  .fb-pg1{
+    display:none;
+  }
+  .fb-pg2{
+    margin-left: -1rem;
+  }
+  .hour-info{
+    padding: 1em 3em;
+  }
+  .anchor {
+      top: 0px;
+  }
+}
+/*LG*/
+@media screen and (max-width: 1199px) and (min-width: 992px) {
+
+  #sidenav {
+    height: 100%;
+    width: 180px;
+    position: fixed;
+    z-index: 0;
+    top: 0;
+    left: 0;
+    overflow-x: hidden;
+    padding-top: 80px;
+  }
+  #sidenav a {
+    padding: 6px 8px 6px 16px;
+    display: block;
+  }/*
+  .img-product{
+    padding: 2%;
+    width: 100%;
+    height: 150px;
+  }*/
+  .fb-head{
+    margin-top: 1rem;
+    margin-right: 1rem;
+    margin-bottom: 0;
+    margin-left: 0;
+    padding: 0.2em;
+  }
+  .p2{
+    display: none;
+  }
+  .p3{
+    display: none;
+  }
+  .img-promo{
+    height: 587px;
+  }
+  .img-rs{
+    width: 65%;
+    margin:0 auto;
+  }
+  .fb-pg1{
+    display:none;
+  }
+  .menu{
+    padding-left: 180px;
+  }
+  .fb-pg2{
+    margin-left: -1rem;
+  }
+  .hour-info{
+    padding: 1em 2em;
+  }
+  .anchor {
+    top: 0px;
+  }
+}
+/*MD*/
+@media screen and (max-width: 991px) and (min-width: 768px){
+  /*
+  .img-product{
+    width: 190px;
+    height: 170px;
+  }*/
+  .fb-head{
+    margin-top: 1rem;
+    margin-right: 1rem;
+    margin-bottom: 0;
+    margin-left: 0;
+    padding: 0.2em;
+  }
+  .p1{
+    display: none;
+  }
+  .p3{
+    display: none;
+  }
+  .img-promo{
+    height: 100%;
+  }
+  .fb-pg1{
+    display:none;
+  }
+  .img-rs{
+    width: 75%;
+    margin:0 auto;
+  }
+  #sidenav {
+    height: 100%;
+    width: 160px;
+    position: fixed;
+    z-index: 0;
+    top: 0;
+    left: 0;
+    overflow-x: hidden;
+    padding-top: 80px;
+  }
+  #sidenav a {
+    padding: 6px 8px 6px 16px;
+    display: block;
+  }
+  .menu{
+    padding-left: 160px;
+  }
+  .fb-pg2{
+    margin-left: -1rem;
+  }
+  .hour-info{
+    padding: 1em;
+    margin-right: 1em;
+  }
+  .anchor {
+    top: 0px;
+  }
+}
+/*SM*/
+@media screen and (max-width: 767px) and (min-width: 576px){
+  #sidenav {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    -ms-overflow-style: -ms-autohiding-scrollbar;
+    white-space: nowrap;
+    z-index: 1;
+    width: 100vw;
+  }
+  #sidenav a{
+    display: inline-block;
+    text-align: center;
+    padding:  10px 5px;
+    margin-bottom: 15px
+  }
+  .sticky {
+    position: sticky;
+    top: 0;
+  }
+  .sticky + .menu{
+    padding-top: 35px;
+  }
+  .img-rs{
+    width: 100%;
+  }
+  .img-product{
+    width: 190px;
+    height: 170px;
+  }
+  .fb-head{
+    margin: 0.4rem 1rem;
+    padding: 0.2em;
+  }
+  .p2{
+    display: none;
+  }
+  .p3{
+    display: none;
+  }
+  .img-promo{
+    height: 470px;
+  }
+  .fb-pg2{
+    display:none;
+  }
+  .fb-pg1{
+    margin-left: 1rem;
+    margin-right: 1rem;
+  }
+  .hour-info{
+    padding: 1em 2em;
+    font-size: smaller;
+  }
+  .acercade{
+    font-size: smaller;
+  }
+  .anchor {
+    top: -55px;
+  }
+}
+
+/*XS*/
+@media screen and (max-width: 575px) {
+  .hour-info{
+    padding: 1em 3em;
+  }
+  .img-rs{
+    width: 100%;
+    height: 120%;
+  }
+  #sidenav {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    -ms-overflow-style: -ms-autohiding-scrollbar;
+    white-space: nowrap;
+    z-index: 1;
+    width: 100vw;
+  }
+  #sidenav a {
+    display: inline-block;
+    text-align: center;
+    padding:  10px 5px;
+    margin-bottom: 15px
+  }
+  .sticky {
+    position: sticky;
+    top: 0;
+  }
+  .sticky + .menu{
+    padding-top: 35px;
+  }
+  .img-product{
+    width: 45vw;
+    height: auto;
+  }
+  .p1{
+    display: none;
+  }
+  .p2{
+    display: none;
+  }
+  .img-promo{
+    height: 470px;
+  }
+  .fb-head{
+    margin: 0.4rem 1rem;
+    padding: 0.2em;
+  }
+  .fb-pg2{
+    display:none;
+  }
+  .fb-pg1{
+    margin-left: 1rem;
+    margin-right: 1rem;
+  }
+  .img-circle{
+    padding: 7vw;
+  }
+  .acercade{
+    font-size: smaller;
+  }
+  .anchor {
+    top: -55px;
+  }
+}
+/*Chrome y Opera*/
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+
+}
