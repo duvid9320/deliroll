@@ -18,7 +18,7 @@ class MenuController {
     public function showMenuCategorias() {
         $categorias = CategoriaDAO::getInstance()->getAll();
         ?>
-        <div class="sidenav bg-b">
+        <div class="sidenav bg-b" id="sidenav">
             <?php foreach ($categorias AS $categoria) { ?>
                 <a href="#<?php echo $this->castCategoria($categoria)->getNombre() ?>"><?php echo $this->castCategoria($categoria)->getNombre() ?></a>
             <?php } ?>
@@ -30,7 +30,8 @@ class MenuController {
         $categorias = CategoriaDAO::getInstance()->getAll();
         foreach ($categorias AS $categoria) {
             ?>
-            <div class="container-fluid" id="<?php echo $this->castCategoria($categoria)->getNombre() ?>">
+            <span class="anchor" id="<?php echo $this->castCategoria($categoria)->getNombre() ?>"></span>
+            <div class="container-fluid prl-0" >
                 <div class=" text-center col-md-12 col-xl-12 col-xs-12 tag bg-4">
                     <h3><?php echo $this->castCategoria($categoria)->getNombre() ?></h3>
                 </div>
@@ -49,12 +50,12 @@ class MenuController {
                 <img src="backend/<?php echo $this->castProducto($producto)->getRuta()?>" alt="" class="img-thumbnail img-fluid img-product">
             </div>
             <div class="col-sm-8 col-lg-4 my-2">
-                
+
                 <h3><?php echo $this->castProducto($producto)->getTitulo() ?></h3>
                 <h4> $<?php echo $this->castProducto($producto)->getPrecio()?> MXN</h4>
-                <?php echo $this->castProducto($producto)->getContenido()?>
+                <h6><?php echo $this->castProducto($producto)->getContenido()?></h6>
             </div>
-            
+
 <?php
         }
     }
