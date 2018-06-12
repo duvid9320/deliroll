@@ -6,7 +6,6 @@ class GestorGaleria {
 
     public function mostrarImagenController($datos) {
 
-        echo '<script type="text/javascript">alert('. print_r($datos, true).');</script>';
         return;
         list($ancho, $alto) = getimagesize($datos);
 
