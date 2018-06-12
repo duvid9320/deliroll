@@ -5,8 +5,6 @@ class GestorGaleria {
     #------------------------------------------------------------
 
     public function mostrarImagenController($datos) {
-
-        return;
         list($ancho, $alto) = getimagesize($datos);
 
         if ($ancho < 1024 || $alto < 768) {
