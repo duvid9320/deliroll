@@ -7,6 +7,7 @@
   fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));</script>
 
+
 <div class="container-fluid bg-b">
   <div class="row p-0">
     <div class="col-md-7 col-lg-8 col-sm-12 bg-2 p-0">
@@ -18,19 +19,21 @@
               }
           }
           image = new ImageArray(7);
-          image[0] = 'promo.png';
-          image[1] = 'P_lunes.png';
-          image[2] = 'P_martes.png';
-          image[3] = 'P_miercoles.png';
-          image[4] = 'P_jueves.png';
-          image[5] = 'P_viernes.png';
-          image[6] = 'promo.png';
+          image[0] = 'Promos';
+          image[1] = 'P_lunes';
+          image[2] = 'P_martes';
+          image[3] = 'P_miercoles';
+          image[4] = 'P_jueves';
+          image[5] = 'Promos';
+          image[6] = 'Promos';
           var currentdate = new Date();
           var imagenumber = currentdate.getDay();//-1?
-          document.write('<img src= "images/' + image[imagenumber] + '" class="img-promo w-100">');
+          document.write('<img src= "images/' + image[imagenumber] + '1.jpg" class="img-promo w-100 p1">');
+          document.write('<img src= "images/' + image[imagenumber] + '2.jpg" class="img-promo w-100 p2">');
+          document.write('<img src= "images/' + image[imagenumber] + '3.jpg" class="img-promo w-100 p3">');
       </script>
     </div>
-
+    
     <div class="col-md-5 col-lg-4 col-sm-12 text-center bg-2 p-0">
       <h5 class="bg-opac fb-head">CHECA NUESTRAS OTRAS PROMOCIONES EN FACEBOOK</h5>
       <div class="fb-pg2">
