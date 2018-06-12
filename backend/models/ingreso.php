@@ -4,7 +4,7 @@ require_once "conexion.php";
 
 class IngresoModels{
 
-	public function ingresoModel($datosModel, $tabla){
+	public static function ingresoModel($datosModel, $tabla){
 
 		$stmt = Conexion::conectar()->prepare("SELECT id, usuario, password, email, photo, rol, intentos FROM $tabla WHERE usuario = :usuario");
 
@@ -18,7 +18,7 @@ class IngresoModels{
 
 	}
 
-	public function intentosModel($datosModel, $tabla){
+	public static function intentosModel($datosModel, $tabla){
 
 		$stmt = Conexion::conectar()->prepare("UPDATE $tabla SET intentos = :intentos WHERE usuario = :usuario");
 

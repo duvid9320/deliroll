@@ -2,7 +2,7 @@
 
 class EnlacesModels{
 
-	public function enlacesModel($enlaces){
+	public static function enlacesModel($enlaces){
 
 		if($enlaces == "inicio" ||
 		   $enlaces == "ingreso" ||

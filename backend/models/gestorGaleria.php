@@ -6,7 +6,7 @@ class GestorGaleriaModel{
 
 	#SUBIR LA RUTA DE LA IMAGEN
 	#------------------------------------------------------------
-	public function subirImagenGaleriaModel($datos, $tabla){
+	public static function subirImagenGaleriaModel($datos, $tabla){
 
 		$stmt = Conexion::conectar()->prepare("INSERT INTO $tabla (ruta) VALUES (:ruta)");
 
@@ -26,7 +26,7 @@ class GestorGaleriaModel{
 
 	#SELECCIONAR LA RUTA DE LA IMAGEN
 	#------------------------------------------------------------
-	public function mostrarImagenGaleriaModel($datos, $tabla){
+	public static function mostrarImagenGaleriaModel($datos, $tabla){
 
 		$stmt = Conexion::conectar()->prepare("SELECT ruta FROM $tabla WHERE ruta = :ruta");
 
@@ -42,7 +42,7 @@ class GestorGaleriaModel{
 
 	#MOSTRAR IMAGEN EN LA VISTA
 	#---------------------------------------------------------
-	public function mostrarImagenVistaModel($tabla){
+	public static function mostrarImagenVistaModel($tabla){
 
 		$stmt = Conexion::conectar()->prepare("SELECT id, ruta FROM $tabla ORDER BY orden ASC");
 
@@ -57,7 +57,7 @@ class GestorGaleriaModel{
 	#ELIMINAR ITEM DE LA GALERIA
 	#-----------------------------------------------------------
 
-	public function eliminarGaleriaModel($datos, $tabla){
+	public static function eliminarGaleriaModel($datos, $tabla){
 
 		$stmt = Conexion::conectar()->prepare("DELETE FROM $tabla WHERE id = :id");
 
@@ -80,7 +80,7 @@ class GestorGaleriaModel{
 	#ACTUALIZAR ORDEN 
 	#---------------------------------------------------
 
-	public function actualizarOrdenModel($datos, $tabla){
+	public static function actualizarOrdenModel($datos, $tabla){
 
 		$stmt = Conexion::conectar()->prepare("UPDATE $tabla SET orden = :orden WHERE id = :id");
 
@@ -103,7 +103,7 @@ class GestorGaleriaModel{
 	#SELECCIONAR ORDEN 
 	#---------------------------------------------------
 
-	public function seleccionarOrdenModel($tabla){
+	public static function seleccionarOrdenModel($tabla){
 
 		$stmt = Conexion::conectar()->prepare("SELECT id, ruta FROM $tabla ORDER BY orden ASC");
 

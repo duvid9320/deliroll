@@ -6,7 +6,7 @@ class MensajesModel{
 
 	#MOSTRAR MENSAJES EN LA VISTA
 	#------------------------------------------------------------
-	public function mostrarMensajesModel($tabla){
+	public static function mostrarMensajesModel($tabla){
 
 		$stmt = Conexion::conectar()->prepare("SELECT id, nombre, email, mensaje, fecha FROM $tabla ORDER BY fecha DESC"); 
 
@@ -19,7 +19,7 @@ class MensajesModel{
 
 	#BORRAR MENSAJES
 	#-----------------------------------------------------
-	public function borrarMensajesModel($datosModel, $tabla){
+	public static function borrarMensajesModel($datosModel, $tabla){
 
 		$stmt = Conexion::conectar()->prepare("DELETE FROM $tabla WHERE id = :id");
 
@@ -43,7 +43,7 @@ class MensajesModel{
 
 	#ENVIAR EMAIL MASIVOS
 	#-------------------------------------------------
-	public function seleccionarEmailSuscriptores($tabla){
+	public static function seleccionarEmailSuscriptores($tabla){
 
 		$stmt = Conexion::conectar()->prepare("SELECT nombre, email FROM $tabla");
 
@@ -57,7 +57,7 @@ class MensajesModel{
 
 	#SELECCIONAR MENSAJES SIN REVISAR
 	#------------------------------------------------------------
-	public function mensajesSinRevisarModel($tabla){
+	public static function mensajesSinRevisarModel($tabla){
 
 		$stmt = Conexion::conectar()->prepare("SELECT revision FROM $tabla");
 
@@ -71,7 +71,7 @@ class MensajesModel{
 
 	#MENSAJES REVISADOS
 	#------------------------------------------------------------
-	public function mensajesRevisadosModel($datosModel, $tabla){
+	public static function mensajesRevisadosModel($datosModel, $tabla){
 
 		$stmt = Conexion::conectar()->prepare("UPDATE $tabla SET revision = :revision");
 

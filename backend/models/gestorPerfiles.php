@@ -6,7 +6,7 @@ class GestorPerfilesModel{
 
 	#GUARDAR PERFIL
 	#------------------------------------------------------------
-	public function guardarPerfilModel($datosModel, $tabla){
+	public static function guardarPerfilModel($datosModel, $tabla){
 
 		$stmt = Conexion::conectar()->prepare("INSERT INTO $tabla (usuario, password, email, photo, rol) VALUES (:usuario, :password, :email, :photo, :rol)");
 
@@ -32,7 +32,7 @@ class GestorPerfilesModel{
 
 	#VISUALIZAR PERFILES
 	#------------------------------------------------------
-	public function verPerfilesModel($tabla){
+	public static function verPerfilesModel($tabla){
 
 		$stmt = Conexion::conectar()->prepare("SELECT id, usuario, password,  email, rol, photo FROM $tabla");
 
@@ -46,7 +46,7 @@ class GestorPerfilesModel{
 
 	#ACTUALIZAR PERFIL
 	#---------------------------------------------------
-	public function editarPerfilModel($datosModel, $tabla){
+	public static function editarPerfilModel($datosModel, $tabla){
 
 		$stmt = Conexion::conectar()->prepare("UPDATE $tabla SET usuario = :usuario, password = :password, email = :email, rol = :rol, photo = :photo WHERE id = :id");	
 
@@ -73,7 +73,7 @@ class GestorPerfilesModel{
 
 	#BORRAR PERFIL
 	#-----------------------------------------------------
-	public function borrarPerfilModel($datosModel, $tabla){
+	public static function borrarPerfilModel($datosModel, $tabla){
 
 		$stmt = Conexion::conectar()->prepare("DELETE FROM $tabla WHERE id = :id");
 

@@ -6,7 +6,7 @@ class GestorArticulosModel {
     #GUARDAR ARTICULO
     #------------------------------------------------------------
 
-    public function guardarArticuloModel($datosModel, $tabla) {
+    public static function guardarArticuloModel($datosModel, $tabla) {
 
         $stmt = Conexion::conectar()->prepare("INSERT INTO $tabla (titulo, introduccion, ruta, contenido, orden, precio, estado, idCategoria) VALUES (:titulo, :introduccion, :ruta, :contenido, :orden, :precio, :estado, :idCategoria)");
 
@@ -34,7 +34,7 @@ class GestorArticulosModel {
     #MOSTRAR ARTÍCULOS
     #------------------------------------------------------
 
-    public function mostrarArticulosModel($tabla) {
+    public static function mostrarArticulosModel($tabla) {
 
         $stmt = Conexion::conectar()->prepare("SELECT id, titulo, introduccion, ruta, contenido, precio, estado FROM $tabla ORDER BY orden ASC");
 
@@ -48,7 +48,7 @@ class GestorArticulosModel {
     #BORRAR ARTICULOS
     #-----------------------------------------------------
 
-    public function borrarArticuloModel($datosModel, $tabla) {
+    public static function borrarArticuloModel($datosModel, $tabla) {
 
         $stmt = Conexion::conectar()->prepare("DELETE FROM $tabla WHERE id = :id");
 
@@ -68,7 +68,7 @@ class GestorArticulosModel {
     #ACTUALIZAR ARTICULOS
     #---------------------------------------------------
 
-    public function editarArticuloModel($datosModel, $tabla) {
+    public static function editarArticuloModel($datosModel, $tabla) {
 
         $stmt = Conexion::conectar()->prepare("UPDATE $tabla SET estado = :estado, titulo = :titulo, introduccion = :introduccion, ruta = :ruta, contenido = :contenido, precio = :precio, idCategoria = :idCategoria WHERE id = :id");
 
@@ -93,7 +93,7 @@ class GestorArticulosModel {
     #ACTUALIZAR ORDEN 
     #---------------------------------------------------
 
-    public function actualizarOrdenModel($datos, $tabla) {
+    public static function actualizarOrdenModel($datos, $tabla) {
 
         $stmt = Conexion::conectar()->prepare("UPDATE $tabla SET orden = :orden WHERE id = :id");
 
@@ -113,7 +113,7 @@ class GestorArticulosModel {
     #SELECCIONAR ORDEN 
     #---------------------------------------------------
 
-    public function seleccionarOrdenModel($tabla) {
+    public static function seleccionarOrdenModel($tabla) {
 
         $stmt = Conexion::conectar()->prepare("SELECT id, titulo, introduccion, ruta, contenido FROM $tabla ORDER BY orden ASC");
 

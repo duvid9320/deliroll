@@ -6,7 +6,7 @@ class SuscriptoresModel{
 
 	#MOSTRAR Suscriptores EN LA VISTA
 	#------------------------------------------------------------
-	public function mostrarSuscriptoresModel($tabla){
+	public static function mostrarSuscriptoresModel($tabla){
 
 		$stmt = Conexion::conectar()->prepare("SELECT id, nombre, email FROM $tabla");
 
@@ -20,7 +20,7 @@ class SuscriptoresModel{
 
 	#BORRAR Suscriptores
 	#-----------------------------------------------------
-	public function borrarSuscriptoresModel($datosModel, $tabla){
+	public static function borrarSuscriptoresModel($datosModel, $tabla){
 
 		$stmt = Conexion::conectar()->prepare("DELETE FROM $tabla WHERE id = :id");
 
@@ -44,7 +44,7 @@ class SuscriptoresModel{
 
 	#SELECCIONAR SUSCRIPTORES SIN REVISAR
 	#------------------------------------------------------------
-	public function suscriptoresSinRevisarModel($tabla){
+	public static function suscriptoresSinRevisarModel($tabla){
 	
 		$stmt = Conexion::conectar()->prepare("SELECT revision FROM $tabla");
 
@@ -58,7 +58,7 @@ class SuscriptoresModel{
 
 	#SUSCRIPTORES REVISADOS
 	#------------------------------------------------------------
-	public function suscriptoresRevisadosModel($datosModel, $tabla){
+	public static function suscriptoresRevisadosModel($datosModel, $tabla){
 
 		$stmt = Conexion::conectar()->prepare("UPDATE $tabla SET revision = :revision");
 

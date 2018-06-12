@@ -5,7 +5,7 @@ class GestorVideos{
 	#MOSTRAR VIDEO AJAX
 	#------------------------------------------------------------
 
-	public function mostrarVideoController($datos){
+	public static function mostrarVideoController($datos){
 
 		$aleatorio = mt_rand(100, 999);
 
@@ -25,7 +25,7 @@ class GestorVideos{
 
 	#MOSTRAR VIDEOS EN LA VISTA
 	#------------------------------------------------------------
-	public function mostrarVideoVistaController(){
+	public static function mostrarVideoVistaController(){
 
 		$respuesta = GestorVideosModel::mostrarVideoVistaModel("videos");
 
@@ -44,7 +44,7 @@ class GestorVideos{
 
 	#ELIMINAR VIDEO
 	#-----------------------------------------------------------
-	public function eliminarVideoController($datos){
+	public static function eliminarVideoController($datos){
 
 		$respuesta = GestorVideosModel::eliminarVideoModel($datos, "videos");
 
@@ -56,7 +56,7 @@ class GestorVideos{
 
 	#ACTUALIZAR ORDEN 
 	#---------------------------------------------------
-	public function actualizarOrdenController($datos){
+	public static function actualizarOrdenController($datos){
 
 		GestorVideosModel::actualizarOrdenModel($datos, "videos");
 

@@ -7,7 +7,7 @@ class GestorSlideModel{
 	#SUBIR LA RUTA DE LA IMAGEN
 	#------------------------------------------------------------
 
-	public function subirImagenSlideModel($datos, $tabla){
+	public static function subirImagenSlideModel($datos, $tabla){
 
 		$stmt = Conexion::conectar()->prepare("INSERT INTO $tabla (ruta) VALUES (:ruta)");
 
@@ -29,7 +29,7 @@ class GestorSlideModel{
 	#SELECCIONAR LA RUTA DE LA IMAGEN
 	#------------------------------------------------------------
 
-	public function mostrarImagenSlideModel($datos, $tabla){
+	public static function mostrarImagenSlideModel($datos, $tabla){
 
 		$stmt = Conexion::conectar()->prepare("SELECT ruta, titulo, descripcion FROM $tabla WHERE ruta = :ruta");
 
@@ -45,7 +45,7 @@ class GestorSlideModel{
 
 	#MOSTRAR IMAGEN EN LA VISTA
 	#---------------------------------------------------------
-	public function mostrarImagenVistaModel($tabla){
+	public static function mostrarImagenVistaModel($tabla){
 
 		$stmt = Conexion::conectar()->prepare("SELECT id, ruta, titulo, descripcion FROM $tabla ORDER BY orden ASC");
 
@@ -60,7 +60,7 @@ class GestorSlideModel{
 	#ELIMINAR ITEM DEL SLIDE
 	#-----------------------------------------------------------
 
-	public function eliminarSlideModel($datos, $tabla){
+	public static function eliminarSlideModel($datos, $tabla){
 
 		$stmt = Conexion::conectar()->prepare("DELETE FROM $tabla WHERE id = :id");
 
@@ -82,7 +82,7 @@ class GestorSlideModel{
 
 	#ACTUALIZAR ITEM DEL SLIDE
 	#-----------------------------------------------------------
-	public function actualizarSlideModel($datos, $tabla){
+	public static function actualizarSlideModel($datos, $tabla){
 
 		$stmt = Conexion::conectar()->prepare("UPDATE $tabla SET titulo = :titulo, descripcion = :descripcion WHERE id = :id");	
 
@@ -107,7 +107,7 @@ class GestorSlideModel{
 	#SELECCIONAR ITEM DEL SLIDE
 	#-----------------------------------------------------------
 
-	public function seleccionarActualizacionSlideModel($datos, $tabla){
+	public static function seleccionarActualizacionSlideModel($datos, $tabla){
 
 		$stmt = Conexion::conectar()->prepare("SELECT titulo, descripcion FROM $tabla WHERE id = :id");
 
@@ -124,7 +124,7 @@ class GestorSlideModel{
 	#ACTUALIZAR ORDEN 
 	#---------------------------------------------------
 
-	public function actualizarOrdenModel($datos, $tabla){
+	public static function actualizarOrdenModel($datos, $tabla){
 
 		$stmt = Conexion::conectar()->prepare("UPDATE $tabla SET orden = :orden WHERE id = :id");
 
@@ -147,7 +147,7 @@ class GestorSlideModel{
 		#SELECCIONAR ORDEN 
 	#---------------------------------------------------
 
-	public function seleccionarOrdenModel($tabla){
+	public static function seleccionarOrdenModel($tabla){
 
 		$stmt = Conexion::conectar()->prepare("SELECT id, ruta, titulo, descripcion FROM $tabla ORDER BY orden ASC");
 
