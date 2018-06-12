@@ -44,24 +44,7 @@
       </div>
     </div>
   </div>
-  <div class="row">
-    <div class=" text-center col-md-12 col-xl-12 col-xs-12 tag bg-2">
-        <h3>MÁS PROMOS</h3>
-    </div>
-  </div>
-
-  <div class="row">
-    <div class=" text-center col-sm-6 col-md-4 col-lg-4">
-      <img src="images/promos.png" alt="" class="img-circle w-100">
-    </div>
-    <div class=" text-center col-sm-6 col-md-4 col-lg-4">
-      <img src="images/promos.png" alt="" class="img-circle w-100">
-    </div>
-    <div class=" text-center col-sm-6 offset-sm-3 offset-md-0 col-md-4 col-lg-4">
-      <img src="images/promos.png" alt="" class="img-circle w-100">
-    </div>
-  </div>
-
+  
    <?php
         include_once 'lib/controller/GaleriaController.php';
         $galeriaController = new GaleriaController();
