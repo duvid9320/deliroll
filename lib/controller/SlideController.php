@@ -22,7 +22,7 @@ class SlideController {
                 $imagenesSlide = SlideDAO::getInstance()->getImages();
                 $i = 0;
                 foreach ($imagenesSlide as $imagen) {
-                    if ($i == 0) {
+                    if (++$i == 0) {
                         ?>
                         <div class="carousel-item active">
                             <img class="d-block img-rs " src="<?php echo "backend" . substr($this->castSlide($imagen)->getRuta(), 5) ?>">
