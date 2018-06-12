@@ -26,7 +26,7 @@ class GestorSlide {
 
             #imagecrop() — Recorta una imagen usando las coordenadas, el tamaño, x, y, ancho y alto dados
 
-            $destino = imagecrop($origen, ["x" => 0, "y" => 0, "width" => 1000, "height" => 600]);
+            $destino = imagecrop($origen, ["x" => 0, "y" => 0, "width" => 1180, "height" => 850]);
 
             #imagejpeg() — Exportar la imagen al navegador o a un fichero
 
