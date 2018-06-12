@@ -12,3 +12,16 @@
     ?>
 
 </div>
+
+<script>
+window.onscroll = function() {myFunction()};
+var sidenav = document.getElementById("sidenav");
+var sticky = sidenav.offsetTop;
+function myFunction() {
+  if (window.pageYOffset >= sticky) {
+    sidenav.classList.add("sticky")
+  } else {
+    sidenav.classList.remove("sticky");
+  }
+}
+</script>
