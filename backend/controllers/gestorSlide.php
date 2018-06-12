@@ -11,7 +11,7 @@ class GestorSlide {
 
         list($ancho, $alto) = getimagesize($datos["imagenTemporal"]);
 
-        if ($ancho < 1600 || $alto < 600) {
+        if ($ancho < 1000 || $alto < 600) {
 
             echo 0;
         } else {
@@ -26,7 +26,7 @@ class GestorSlide {
 
             #imagecrop() — Recorta una imagen usando las coordenadas, el tamaño, x, y, ancho y alto dados
 
-            $destino = imagecrop($origen, ["x" => 0, "y" => 0, "width" => 1600, "height" => 600]);
+            $destino = imagecrop($origen, ["x" => 0, "y" => 0, "width" => 1000, "height" => 600]);
 
             #imagejpeg() — Exportar la imagen al navegador o a un fichero
 
