@@ -110,7 +110,7 @@ class GestorSlide {
 
         $respuesta = GestorSlideModel::seleccionarOrdenModel("slide");
 
-        if (!is_null($respuesta))
+        //if (!is_null($respuesta))
             foreach ($respuesta as $row => $item) {
 
                 echo'<li id="item' . $item["id"] . '">
