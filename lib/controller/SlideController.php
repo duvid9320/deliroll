@@ -1,5 +1,4 @@
 <?php
-
 include_once 'lib/model/dto/Slide.php';
 include_once 'lib/model/dao/SlideDAO.php';
 /*
@@ -21,22 +20,33 @@ class SlideController {
             <div class = "carousel-inner">
                 <?php
                 $imagenesSlide = SlideDAO::getInstance()->getImages();
+                $i = 0;
                 foreach ($imagenesSlide as $imagen) {
-                    ?>
-                    <div class="carousel-item active">
-                        <img class="d-block img-rs " src="<?php echo "backend".substr ($this->castSlide($imagen)->getRuta(), 5) ?>">
-                    </div>
+                    if ($i == 0) {
+                        ?>
+                        <div class="carousel-item active">
+                            <img class="d-block img-rs " src="<?php echo "backend" . substr($this->castSlide($imagen)->getRuta(), 5) ?>">
+                        </div>
 
-                    <?php
-                }
+                <?php
+            } else {
                 ?>
+                        <div class="carousel-item">
+                            <img class="d-block img-rs " src="<?php echo "backend" . substr($this->castSlide($imagen)->getRuta(), 5) ?>">
+                        </div>
+
+                <?php
+            }
+        }
+        ?>
             </div>
         </div>
-        <?php
-    }
+                <?php
+            }
 
-    private function castSlide($object): Slide {
-        return $object;
-    }
+            private function castSlide($object): Slide {
+                return $object;
+            }
 
-}
+        }
+        
